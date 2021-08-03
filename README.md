@@ -3,5 +3,5 @@
 ## Alunos
 
 - Artur Zorron - 180013696
-- Higor - xx/xxxxxxx
+- Higor - 17/0012387
 - Pedro Augusto - xx/xxxxxxx
