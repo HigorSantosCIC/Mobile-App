@@ -1,14 +1,13 @@
-import React from "react";
-import {TextInput} from "react-native";
-import {Container} from "./styles";
+import React from 'react';
+import { TextInput } from 'react-native';
+import { Container } from './styles';
 
-
-const Input = ({...rest}) => {
+const Input = ({ ...rest }) => {
   return (
     <Container>
-      <TextInput {...rest}/>
+      <TextInput {...rest} />
     </Container>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
