@@ -24,8 +24,8 @@ module.exports = {
     'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
   ],
   rules: {
-    'react/jsx-curly-brace-presence': [2, {props: 'never', children: 'never'}],
-    'prettier/prettier': ['error', {}, {usePrettierrc: true}],
+    'react/jsx-curly-brace-presence': [2, { props: 'never', children: 'never' }],
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react/prop-types': 0,
     'react/display-name': 0,
   },
