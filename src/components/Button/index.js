@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, Button } from 'react-native';
 import { ContainerButton } from './styles';
 
-export default function ButtonMain({ children }) {
+export default function ButtonMain({ children, ...rest}) {
   return (
     <ContainerButton>
       <Button
