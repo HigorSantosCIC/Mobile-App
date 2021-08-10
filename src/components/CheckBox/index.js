@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import CheckBox from 'react-native-check-box';
+import { Checkbox } from 'react-native-paper';
 
-const CheckBoxComponent = () => {
-  // const [state, setState] = useState(false);
+const CheckBox = () => {
+  const [checked, setChecked] = useState(false);
+
   return (
-    <CheckBox
-      onClick={() => {
-        this.setState({
-          isChecked: !this.state.isChecked,
-        });
+    <Checkbox
+      status={checked ? 'checked' : 'unchecked'}
+      onPress={() => {
+        setChecked(!checked);
       }}
-      isChecked={this.state.isChecked}
-      leftText={'CheckBox'}
     />
   );
 };
 
-export default CheckBoxComponent;
+export default CheckBox;
