@@ -18,6 +18,8 @@ export const Button = styled.View`
 
 export const IconButtonContainer = styled.View`
   padding-right: 8px;
+  max-width: 100%;
+  text-align: center;
 `;
 export const ButtonContainer = styled.View`
   align-items: center;
