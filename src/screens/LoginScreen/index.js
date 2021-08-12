@@ -21,32 +21,31 @@ const LoginScreen = () => {
 
       <ButtonContainer style={{ paddingTop: dp(52) }}>
         <Button
-          children="ENTRAR"
           color={theme.colors.primary}
           onPress={() => console.log('Login')}
-          styleTypho={{ color: '#434343' }}></Button>
+          styleTypho={{ color: '#434343' }}>
+          ENTRAR
+        </Button>
 
         <View style={{ paddingTop: dp(72) }}>
-          <Button
-            children="ENTRAR COM FACEBOOK"
-            color="#194F7C"
-            styleTypho={{ color: '#f7f7f7' }}>
+          <Button color="#194F7C" styleTypho={{ color: '#f7f7f7' }}>
+            ENTRAR COM FACEBOOK
             <IconButtonContainer>
-              <FontAwesome name="facebook-square" size={20} color="#f7f7f7">
-                ENTRAR COM FACEBOOK
-              </FontAwesome>
+              <FontAwesome
+                name="facebook-square"
+                size={20}
+                color="#f7f7f7"></FontAwesome>
             </IconButtonContainer>
           </Button>
 
           <View style={{ paddingTop: dp(8) }}>
-            <Button
-              color="#f15f5c"
-              styleTypho={{ color: '#f7f7f7' }}
-              children="ENTRAR COM GOOGLE">
+            <Button color="#f15f5c" styleTypho={{ color: '#f7f7f7' }}>
+              ENTRAR COM GOOGLE
               <IconButtonContainer>
-                <FontAwesome name="google-plus" size={20} color="#f7f7f7">
-                  ENTRAR COM GOOGLE
-                </FontAwesome>
+                <FontAwesome
+                  name="google-plus"
+                  size={20}
+                  color="#f7f7f7"></FontAwesome>
               </IconButtonContainer>
             </Button>
           </View>
