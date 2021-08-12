@@ -6,10 +6,8 @@ import { StyledButton } from './styles';
 const Button = ({ onPress, color, styleTypho, children }) => {
   const renderChild = () => {
     if (typeof children === 'string') {
-      console.log('eh string', children);
       return <Typography style={styleTypho}>{children}</Typography>;
     } else {
-      console.log('Children respondeu', children);
       return children;
     }
   };
