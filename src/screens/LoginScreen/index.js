@@ -9,7 +9,7 @@ import {
   LoginFormContainer,
 } from './styles';
 import { FontAwesome } from '@expo/vector-icons';
-import ButtonMain from '../../components/Button';
+import Button from '../../components/Button';
 
 const LoginScreen = () => {
   return (
@@ -20,56 +20,34 @@ const LoginScreen = () => {
       </LoginFormContainer>
 
       <ButtonContainer style={{ paddingTop: dp(52) }}>
-        <ButtonMain
-          string="ENTRAR"
+        <Button
           color={theme.colors.primary}
-          handlePress={() => console.log('Login')}
-          styleTypho={{ color: '#434343' }}></ButtonMain>
-        {/* <TouchableWithoutFeedback onPress={() => console.log('Login')}>
-          <Button color={theme.colors.primary}>
-            <Typography style={{ color: '#434343' }}>ENTRAR</Typography>
-          </Button>
-        </TouchableWithoutFeedback> */}
+          onPress={() => console.log('Login')}
+          styleTypho={{ color: '#434343' }}>
+          ENTRAR
+        </Button>
 
         <View style={{ paddingTop: dp(72) }}>
-          <ButtonMain
-            string="ENTRAR COM FACEBOOK"
-            color="#194F7C"
-            styleTypho={{ color: '#f7f7f7' }}>
+          <Button color="#194F7C" styleTypho={{ color: '#f7f7f7' }}>
+            ENTRAR COM FACEBOOK
             <IconButtonContainer>
-              <FontAwesome name="facebook-square" size={20} color="#f7f7f7" />
+              <FontAwesome
+                name="facebook-square"
+                size={20}
+                color="#f7f7f7"></FontAwesome>
             </IconButtonContainer>
-          </ButtonMain>
-          {/* <TouchableWithoutFeedback style={{ paddingTop: 20 }}>
-            <Button color="#194F7C">
-              <IconButtonContainer>
-                <FontAwesome name="facebook-square" size={20} color="#f7f7f7" />
-              </IconButtonContainer>
-              <Typography style={{ color: '#f7f7f7' }}>
-                ENTRAR COM FACEBOOK
-              </Typography>
-            </Button>
-          </TouchableWithoutFeedback> */}
+          </Button>
 
           <View style={{ paddingTop: dp(8) }}>
-            <ButtonMain
-              color="#f15f5c"
-              styleTypho={{ color: '#f7f7f7' }}
-              string="ENTRAR COM GOOGLE">
+            <Button color="#f15f5c" styleTypho={{ color: '#f7f7f7' }}>
+              ENTRAR COM GOOGLE
               <IconButtonContainer>
-                <FontAwesome name="google-plus" size={20} color="#f7f7f7" />
+                <FontAwesome
+                  name="google-plus"
+                  size={20}
+                  color="#f7f7f7"></FontAwesome>
               </IconButtonContainer>
-            </ButtonMain>
-            {/* <TouchableWithoutFeedback style={{ paddingTop: 20 }}>
-              <Button color="#f15f5c">
-                <IconButtonContainer>
-                  <FontAwesome name="google-plus" size={20} color="#f7f7f7" />
-                </IconButtonContainer>
-                <Typography style={{ color: '#f7f7f7' }}>
-                  ENTRAR COM GOOGLE
-                </Typography>
-              </Button>
-            </TouchableWithoutFeedback> */}
+            </Button>
           </View>
         </View>
       </ButtonContainer>

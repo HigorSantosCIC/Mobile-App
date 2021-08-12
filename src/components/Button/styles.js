@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { dp } from '../../constants/Spacing';
 
-export const Button = styled.View`
+export const StyledButton = styled.View`
   height: ${dp(40)}px;
   width: ${dp(232)}px;
   background-color: ${({ color }) => color};
