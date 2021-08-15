@@ -17,8 +17,27 @@ export const create = async (email, password, name) => {
   }
 };
 
+export const show = async (id) => {
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          Alert.alert('No user data found!');
+          reject('No user data found!');
+        } else {
+          resolve(doc.data());
+        }
+      });
+  });
+};
+
 const Users = {
   create,
+  show,
 };
 
 export default Users;

@@ -12,13 +12,15 @@ import { FontAwesome } from '@expo/vector-icons';
 import Button from '../../components/Button';
 import api from '../../services/api';
 import Typography from '../../components/Typography';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    api.Sessions.create(email, password).then(() => console.log('loginSucesso'));
+    api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
   };
 
   return (
