@@ -3,7 +3,7 @@ import Users from './users';
 
 const api = {
   Users,
-  Sessions
+  Sessions,
 };
 
 export default api;
