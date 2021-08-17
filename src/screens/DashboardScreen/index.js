@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import Typography from '../../components/Typography';
 
 const DashboardScreen = () => {
