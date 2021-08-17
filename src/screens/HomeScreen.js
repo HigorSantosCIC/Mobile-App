@@ -6,15 +6,22 @@ import api from '../services/api';
 const HomeScreen = ({ navigation }) => {
   return (
     <View>
-      <Text>Open up App.js to start working on your app!</Text>
       <TouchableOpacity onPress={() => navigation.push('Login')}>
         <Text style={{ color: 'blue' }}>Ir para página de login</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={() => navigation.push('Cadastro')}>
+        <Text style={{ color: 'blue' }}>
+          Ir para página de cadastro de animais
+        </Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
-        onPress={() =>
-          api.Users.create('pedro2@teste.com', '123456', 'Pedro Augusto')
-        }>
+      // onPress={
+      //   (() => api.Users.create('pedro2@teste.com', '123456', 'Pedro Augusto'),
+      //   api.Users.create('higorsantos@teste.com', '123456', 'Higor Santos'))
+      // }
+      >
         <Text style={{ color: 'blue' }}>Criar user de teste</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
