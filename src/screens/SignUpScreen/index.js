@@ -1,4 +1,4 @@
-import { Text, TouchableHighlight, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useState } from 'react';
 import Input from '../../components/Input';
 import { dp } from '../../constants/Spacing';
@@ -27,7 +27,7 @@ const SignUpScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [avatar, setAvatar] = useState('');
+  // const [avatar, setAvatar] = useState('');
 
   const handleSignup = () => {
     api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
