@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import apiKeys from '../config/keys';
 import React from 'react';
 import Navigator from './navigation';
