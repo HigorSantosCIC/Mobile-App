@@ -6,16 +6,6 @@ export const LoginFormContainer = styled.View`
   padding-horizontal: ${dp(16)}px;
 `;
 
-export const Button = styled.View`
-  height: ${dp(40)}px;
-  width: ${dp(232)}px;
-  background-color: ${({ color }) => color};
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  flex-direction: row;
-`;
-
 export const IconButtonContainer = styled.View`
   padding-right: 8px;
   max-width: 100%;

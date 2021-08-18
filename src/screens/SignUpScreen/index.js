@@ -3,16 +3,9 @@ import React, { useState } from 'react';
 import Input from '../../components/Input';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
-import {
-  // ButtonContainer,
-  // IconButtonContainer,
-  SignupFormContainer,
-  SignupFormTitle,
-} from './styles';
-// import { FontAwesome } from '@expo/vector-icons';
+import { SignupFormContainer, SignupFormTitle } from './styles';
 import Button from '../../components/Button';
 import api from '../../services/api';
-// import Typography from '../../components/Typography';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen = () => {
@@ -22,7 +15,7 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
-  const [adress, setAdress] = useState('');
+  const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -94,8 +87,8 @@ const SignUpScreen = () => {
         <Input
           placeholder="Endereço"
           style={{ marginTop: dp(20) }}
-          value={adress}
-          onChangeText={(adress) => setAdress(adress)}
+          value={address}
+          onChangeText={(address) => setAddress(address)}
           autoCapitalize="none"
         />
         <Input
