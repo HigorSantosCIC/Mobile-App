@@ -23,23 +23,16 @@ export const Button = styled.View`
 `;
 
 export const ButtonContainer = styled.View`
-  /* flex-direction: row; */
+  padding-top: 30px;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin: 10px;
-  justify-content: space-around;
-  padding: 10px;
 `;
 
 export const IconContainer = styled.View`
   align-items: center;
   justify-content: center;
   background-color: #f1f2f2;
-`;
-
-export const CheckContainer = styled.View`
-  flex-direction: row;
-  padding: 10px 0.5px;
-  align-items: center;
 `;
 
 export const ViewContainer = styled.View`
