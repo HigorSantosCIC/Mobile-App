@@ -1,7 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import api from '../services/api';
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -14,11 +13,10 @@ const HomeScreen = ({ navigation }) => {
         <Text style={{ color: 'blue' }}>SIGN UP</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() =>
-          api.Users.create('pedro2@teste.com', '123456', 'Pedro Augusto')
-        }>
-        <Text style={{ color: 'blue' }}>CREATE TEST USER</Text>
+      <TouchableOpacity onPress={() => navigation.push('Cadastro')}>
+        <Text style={{ color: 'blue' }}>
+          Ir para página de cadastro de animais
+        </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>

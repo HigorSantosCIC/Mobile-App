@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
-import { Checkbox } from 'react-native-paper';
+import { Checkbox, Text } from 'react-native-paper';
+import styled from 'styled-components/native';
 
-const CheckBox = () => {
+const CheckBox = ({ text }) => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <Checkbox
-      status={checked ? 'checked' : 'unchecked'}
-      onPress={() => {
-        setChecked(!checked);
-      }}
-    />
+    <CheckContainer>
+      <Checkbox
+        status={checked ? 'checked' : 'unchecked'}
+        onPress={() => {
+          setChecked(!checked);
+        }}
+      />
+      <Text>{text}</Text>
+    </CheckContainer>
   );
 };
+
+export const CheckContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex-flow: wrap;
+  width: 100%;
+`;
 
 export default CheckBox;
