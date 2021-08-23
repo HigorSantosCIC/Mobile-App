@@ -1,7 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import api from '../services/api';
 
 const HomeScreen = ({ navigation }) => {
   return (

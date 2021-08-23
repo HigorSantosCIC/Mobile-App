@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { Checkbox, Text } from 'react-native-paper';
 import styled from 'styled-components/native';
 
@@ -24,7 +23,6 @@ export const CheckContainer = styled.View`
   align-items: center;
   flex-flow: wrap;
   width: 100%;
-  overflow-wrap: ;
 `;
 
 export default CheckBox;
