@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
 import { AntDesign } from '@expo/vector-icons';
-import { dataIdade, dataPorte, dataSexo, dataEspecie } from '../ArraySelect';
+import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
 
 const RegisterScreen = () => {
   const onPressAdocao = () => {

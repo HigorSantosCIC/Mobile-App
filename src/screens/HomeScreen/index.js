@@ -1,4 +1,4 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Button from '../../components/Button';
