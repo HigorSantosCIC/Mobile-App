@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
 import { AntDesign } from '@expo/vector-icons';
-import { dataIdade, dataPorte, dataSexo, dataEspecie } from '../ArraySelect';
+import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
 
 const RegisterScreen = () => {
   const onPressAdocao = () => {
@@ -41,7 +41,7 @@ const RegisterScreen = () => {
       <ButtonContainer>
         <Button
           style={{ borderRadius: dp(2) }}
-          color={theme.colors.secundary}
+          color={theme.colors.secondary}
           onPress={onPressAdocao}
           styleTypho={{ color: '#434343' }}>
           ADOÇÃO
@@ -145,7 +145,7 @@ const RegisterScreen = () => {
       />
       <ButtonContainer>
         <Button
-          color={theme.colors.secundary}
+          color={theme.colors.secondary}
           onPress={() => console.log('next page')}
           styleTypho={{ color: '#434343' }}>
           COLOCAR PARA ADOCAO
