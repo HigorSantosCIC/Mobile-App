@@ -41,7 +41,7 @@ const RegisterScreen = () => {
       <ButtonContainer>
         <Button
           style={{ borderRadius: dp(2) }}
-          color={theme.colors.secundary}
+          color={theme.colors.secondary}
           onPress={onPressAdocao}
           styleTypho={{ color: '#434343' }}>
           ADOÇÃO
@@ -145,7 +145,7 @@ const RegisterScreen = () => {
       />
       <ButtonContainer>
         <Button
-          color={theme.colors.secundary}
+          color={theme.colors.secondary}
           onPress={() => console.log('next page')}
           styleTypho={{ color: '#434343' }}>
           COLOCAR PARA ADOCAO

@@ -16,6 +16,7 @@ const useCachedResources = () => {
           Roboto: require('../../assets/fonts/Roboto-Regular.ttf'),
           Roboto_Medium: require('../../assets/fonts/Roboto-Medium.ttf'),
           Roboto_Bold: require('../../assets/fonts/Roboto-Bold.ttf'),
+          Courgette: require('../../assets/fonts/Courgette-Regular.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
