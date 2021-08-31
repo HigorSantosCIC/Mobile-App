@@ -11,15 +11,21 @@ import {
 } from './styles';
 import CheckBox from '../../components/CheckBox';
 import Button from '../../components/Button';
+// import { useEffect } from 'react';
 import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
 import { AntDesign } from '@expo/vector-icons';
 import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
+import api from '../../services/api';
 
 const RegisterScreen = () => {
   const onPressAdocao = () => {
     setFluxo('ADOÇÃO');
     console.log('ADOCAO');
+  };
+
+  const handleRegister = () => {
+    api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
   };
 
   const [fluxo, setFluxo] = useState('ADOÇÃO');
@@ -146,7 +152,7 @@ const RegisterScreen = () => {
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
-          onPress={() => console.log('next page')}
+          onPress={() => handleRegister}
           styleTypho={{ color: '#434343' }}>
           COLOCAR PARA ADOCAO
         </Button>
