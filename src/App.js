@@ -7,7 +7,9 @@ import { registerRootComponent } from 'expo';
 import { theme } from './constants/Theme';
 import { ThemeProvider } from 'styled-components/native';
 import useCachedResources from './hooks/useCachedResources';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs(['Setting a timer']);
 const App = () => {
   const isLoadingComplete = useCachedResources();
 
