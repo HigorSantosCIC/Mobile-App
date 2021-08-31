@@ -12,7 +12,6 @@ import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
 
 const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
-  console.log(picture);
   return (
     <Container>
       <Header>
