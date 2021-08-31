@@ -1,6 +1,5 @@
 import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
 import {
@@ -16,7 +15,8 @@ import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
 import { AntDesign } from '@expo/vector-icons';
 import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
-import api from '../../services/api';
+import firebase from 'firebase';
+import * as ImagePicker from 'expo-image-picker';
 
 const RegisterScreen = () => {
   const onPressAdocao = () => {
@@ -27,6 +27,33 @@ const RegisterScreen = () => {
   const handleRegister = () => {
     api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
   };
+  const [id, setId] = useState(0);
+
+  async function UploadScreen() {
+    console.log('printando porq funfou');
+    const pickerResult = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+    });
+
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function () {
+        reject(new TypeError('Network request failed'));
+      };
+      xhr.responseType = 'blob';
+      xhr.open('GET', pickerResult.uri, true);
+      xhr.send(null);
+    });
+    const ref = firebase.storage().ref().child(`images/${id}`);
+    setId(id + 1);
+    const snapshot = await ref.put(blob, { contentType: 'image/png' });
+    const remoteURL = await snapshot.ref.getDownloadURL();
+    return remoteURL;
+  }
 
   const [fluxo, setFluxo] = useState('ADOÇÃO');
 
@@ -78,7 +105,7 @@ const RegisterScreen = () => {
         <Text> FOTOS DO ANIMAL</Text>
       </View>
       {/* Botao de adicionar fotos */}
-      <TouchableHighlight onPress={() => console.log('testando rsrs')}>
+      <TouchableHighlight onPress={UploadScreen}>
         <ViewContainer>
           <View style={{ height: dp(128), width: dp(312) }}>
             <IconContainer style={{ paddingTop: dp(44), paddingBottom: dp(48) }}>

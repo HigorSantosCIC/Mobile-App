@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import AdoptScreen from '../screens/AdoptScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ const Navigator = () => {
         <Stack.Screen name="Cadastro" component={RegisterScreen} />
         <Stack.Screen name="Signup" component={SignUpScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen
+          name="Adopt"
+          component={AdoptScreen}
+          options={{ title: 'Adotar' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

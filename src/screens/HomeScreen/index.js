@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
 
       <Button
         color={theme.colors.secondary}
-        onPress={() => console.log('Em breve')}>
+        onPress={() => navigation.push('Adopt')}>
         Adotar
       </Button>
       <View style={{ paddingTop: dp(12) }}>
