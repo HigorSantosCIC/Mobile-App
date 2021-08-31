@@ -32,8 +32,8 @@ const RegisterScreen = () => {
       allowsEditing: true,
       aspect: [1, 1],
     });
-    
-    const blob: Blob = await new Promise((resolve, reject) => {
+
+    const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function () {
         resolve(xhr.response);
