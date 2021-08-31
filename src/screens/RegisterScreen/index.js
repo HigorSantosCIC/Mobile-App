@@ -14,7 +14,6 @@ import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
 import { AntDesign } from '@expo/vector-icons';
 import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
-import * as FileSystem from 'expo-file-system';
 import firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
 
