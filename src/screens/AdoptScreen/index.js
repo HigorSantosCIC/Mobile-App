@@ -30,7 +30,6 @@ const AdoptScreen = () => {
 
   const adopt = (animal) => {
     let currentUserUID = firebase.auth().currentUser.uid;
-    console.log(currentUserUID);
     if (!currentUserUID) {
       return Alert.alert('Você precisa está logado para adotar');
     }

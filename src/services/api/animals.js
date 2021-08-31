@@ -22,7 +22,6 @@ export const all = async ({ isAdopted = false }) => {
 export const adopt = async (animalId, newOwnerId) => {
   const docRefAnimal = firebase.firestore().collection('animal').doc(animalId);
 
-  console.log('ANIMAL_ID', animalId);
   return firebase.firestore().runTransaction((transaction) => {
     return transaction.get(docRefAnimal).then((animal) => {
       if (!animal.exists) {
