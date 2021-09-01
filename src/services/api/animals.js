@@ -36,21 +36,21 @@ export const create = async (
   }
 };
 
-export const show = async (id) => {
-  return new Promise((resolve, reject) => {
-    firebase
-      .firestore()
-      .collection('animals')
-      .doc(id)
-      .get()
-      .then((doc) => {
-        if (!doc.exists) {
-          Alert.alert('No animal data found!');
-          reject('No animal data found!');
-        } else {
-          resolve(doc.data());
-        }
-      });
+// export const show = async (id) => {
+//   return new Promise((resolve, reject) => {
+//     firebase
+//       .firestore()
+//       .collection('animals')
+//       .doc(id)
+//       .get()
+//       .then((doc) => {
+//         if (!doc.exists) {
+//           Alert.alert('No animal data found!');
+//           reject('No animal data found!');
+//         } else {
+//           resolve(doc.data());
+//         }
+//       })};};
 
 export const all = async ({ isAdopted = false }) => {
   return new Promise((resolve, reject) => {

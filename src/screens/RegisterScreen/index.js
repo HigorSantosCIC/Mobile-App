@@ -299,6 +299,8 @@ const RegisterScreen = () => {
       <Input
         placeholder="Compartilhar a historia do animal"
         style={{ paddingLeft: dp(24), paddingTop: dp(24) }}
+        value={description}
+        onChangeText={(description) => setDescription(description)}
       />
       <ButtonContainer>
         <Button

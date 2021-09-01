@@ -23,7 +23,7 @@ const SignUpScreen = () => {
   // const [avatar, setAvatar] = useState('');
 
   const handleSignup = () => {
-    api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
+    api.Users.create(email, password).then(() => navigation.push('Dashboard'));
   };
 
   return (
