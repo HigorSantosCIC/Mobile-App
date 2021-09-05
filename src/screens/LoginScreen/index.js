@@ -20,7 +20,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
+    api.Sessions.create(email, password).then(() => navigation.push('Logged'));
   };
 
   return (
