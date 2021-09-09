@@ -33,7 +33,6 @@ const SignUpScreen = () => {
       phone,
       userName,
       password,
-      passwordConfirmation,
     ).then(() => navigation.push('Dashboard'));
   };
 

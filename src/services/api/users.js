@@ -12,7 +12,6 @@ export const create = async (
   phone,
   userName,
   password,
-  passwordConfirmation,
 ) => {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);

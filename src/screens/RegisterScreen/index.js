@@ -1,4 +1,4 @@
-import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
