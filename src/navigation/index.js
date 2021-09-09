@@ -4,9 +4,9 @@ import React from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import DashboardScreen from '../screens/DashboardScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import AdoptScreen from '../screens/AdoptScreen';
+import LoggedNavigator from './logged';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,11 +22,15 @@ const Navigator = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Cadastro" component={RegisterScreen} />
         <Stack.Screen name="Signup" component={SignUpScreen} />
-        <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen
           name="Adopt"
           component={AdoptScreen}
           options={{ title: 'Adotar' }}
+        />
+        <Stack.Screen
+          name="Logged"
+          component={LoggedNavigator}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

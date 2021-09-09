@@ -58,7 +58,7 @@ export const all = async ({ isAdopted = false }) => {
   return new Promise((resolve, reject) => {
     firebase
       .firestore()
-      .collection('animal')
+      .collection('animals')
       .where('is_adoption', '==', isAdopted)
       .get()
       .then((querySnapshot) => {
@@ -74,7 +74,7 @@ export const all = async ({ isAdopted = false }) => {
 };
 
 export const adopt = async (animalId, newOwnerId) => {
-  const docRefAnimal = firebase.firestore().collection('animal').doc(animalId);
+  const docRefAnimal = firebase.firestore().collection('animals').doc(animalId);
 
   return firebase.firestore().runTransaction((transaction) => {
     return transaction.get(docRefAnimal).then((animal) => {
@@ -98,11 +98,31 @@ export const adopt = async (animalId, newOwnerId) => {
   });
 };
 
+export const myAnimals = async ({ currentUserId }) => {
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('animals')
+      .where('owner_id', '==', currentUserId)
+      .get()
+      .then((querySnapshot) => {
+        const array = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          array.push({ id: doc.id, ...doc.data() });
+        });
+        resolve(array);
+      })
+      .catch((e) => reject(e));
+  });
+};
+
 const Animals = {
   create,
   show,
   all,
   adopt,
+  myAnimals,
 };
 
 export default Animals;
