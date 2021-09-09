@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import React, { useState } from 'react';
 import Input from '../../components/Input';
 import { dp } from '../../constants/Spacing';
@@ -20,7 +20,9 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    api.Sessions.create(email, password).then(() => navigation.push('Dashboard'));
+    api.Sessions.create(email, password)
+      .then(() => navigation.push('Logged'))
+      .catch(() => Alert.alert('E-mail ou senha incorretos'));
   };
 
   return (
