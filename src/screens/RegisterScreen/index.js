@@ -94,7 +94,6 @@ const RegisterScreen = () => {
   };
 
   async function UploadScreen() {
-    console.log('printando porq funfou');
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [1, 1],
