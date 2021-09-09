@@ -90,7 +90,6 @@ const RegisterScreen = () => {
 
   const onPressAdocao = () => {
     setFluxo('ADOÇÃO');
-    console.log('ADOCAO');
   };
 
   async function UploadScreen() {
