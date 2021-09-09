@@ -16,17 +16,83 @@ import { AntDesign } from '@expo/vector-icons';
 import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
 import firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
+import api from '../../services/api';
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = () => {
-  const onPressAdocao = () => {
-    setFluxo('ADOÇÃO');
-    console.log('ADOCAO');
+  const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [species, setSpecies] = useState('');
+  const [sex, setSex] = useState('');
+  const [size, setSize] = useState('');
+  const [age, setAge] = useState('');
+  const [mood, setMood] = useState([]);
+  const [health, setHealth] = useState('[]');
+  const [disease, setDisease] = useState('');
+  const [adoptionNeeds, setAdoptionNeeds] = useState([]);
+  const [description, setDescription] = useState('');
+
+  const handleRegister = () => {
+    api.Animals.create(
+      name,
+      species,
+      sex,
+      size,
+      age,
+      mood,
+      health,
+      disease,
+      adoptionNeeds,
+      description,
+    ).then(() => navigation.push('Dashboard'));
+  };
+
+  const UpdateMood = (word, status) => {
+    let aux;
+    if (status == 'checked') {
+      aux = mood;
+      aux.push(word);
+      setMood(aux);
+    } else {
+      aux = mood;
+      aux.splice(aux.indexOf(word), 1);
+      setMood(aux);
+    }
+  };
+
+  const UpdateHealth = (word, status) => {
+    let aux;
+    if (status == 'checked') {
+      aux = health;
+      aux.push(word);
+      setHealth(aux);
+    } else {
+      aux = health;
+      aux.splice(aux.indexOf(word), 1);
+      setHealth(aux);
+    }
+  };
+
+  const UpdateAdoptionNeeds = (word, status) => {
+    let aux;
+    if (status == 'checked') {
+      aux = adoptionNeeds;
+      aux.push(word);
+      setAdoptionNeeds(aux);
+    } else {
+      aux = adoptionNeeds;
+      aux.splice(aux.indexOf(word), 1);
+      setAdoptionNeeds(aux);
+    }
   };
 
   const [id, setId] = useState(0);
 
+  const onPressAdocao = () => {
+    setFluxo('ADOÇÃO');
+  };
+
   async function UploadScreen() {
-    console.log('printando porq funfou');
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [1, 1],
@@ -90,6 +156,8 @@ const RegisterScreen = () => {
         <Input
           style={{ paddingTop: dp(10), paddingLeft: dp(24) }}
           placeholder="Nome do animal"
+          value={name}
+          onChangeText={(name) => setName(name)}
         />
       </View>
       <View
@@ -118,52 +186,110 @@ const RegisterScreen = () => {
           paddingLeft: dp(24),
         }}>
         <Text style={{ color: '#f7a800' }}> ESPECIE </Text>
-        <SelectOption radioButtonsData={dataEspecie} />
+        <SelectOption
+          radioButtonsData={dataEspecie}
+          onPress={() => setSpecies(dataEspecie.label)}
+        />
       </View>
 
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
         <Text style={{ color: '#f7a800' }}> SEXO </Text>
-        <SelectOption radioButtonsData={dataSexo} />
+        <SelectOption
+          radioButtonsData={dataSexo}
+          onPress={() => setSex(dataSexo.label)}
+        />
       </View>
 
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
         <Text style={{ color: '#f7a800' }}> PORTE </Text>
-        <SelectOption radioButtonsData={dataPorte} />
+        <SelectOption
+          radioButtonsData={dataPorte}
+          onPress={() => setSize(dataPorte.label)}
+        />
       </View>
 
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
         <Text style={{ color: '#f7a800' }}> IDADE </Text>
-        <SelectOption radioButtonsData={dataIdade} />
+        <SelectOption
+          radioButtonsData={dataIdade}
+          onPress={() => setAge(dataIdade.label)}
+        />
       </View>
 
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
         <Text style={{ color: '#f7a800' }}> TEMPERAMENTO </Text>
 
-        <CheckBox text="Brincalhao" />
-        <CheckBox text="Timido" />
-        <CheckBox text="Calmo" />
-        <CheckBox text="Guarda " />
-        <CheckBox text="Amoroso " />
-        <CheckBox text="Preguicoso " />
+        <CheckBox
+          text="Brincalhao"
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
+        <CheckBox
+          text="Timido"
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
+        <CheckBox
+          text="Calmo"
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
+        <CheckBox
+          text="Guarda "
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
+        <CheckBox
+          text="Amoroso "
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
+        <CheckBox
+          text="Preguicoso "
+          onPress={() => UpdateMood(this.text, this.status)}
+        />
       </View>
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
         <Text style={{ color: '#f7a800' }}> SAUDE </Text>
 
-        <CheckBox text="Vacinado" />
-        <CheckBox text="Vermifugado" />
-        <CheckBox text="Castrado" />
-        <CheckBox text="Doente" />
+        <CheckBox
+          text="Vacinado"
+          onPress={() => UpdateHealth(this.text, this.status)}
+        />
+        <CheckBox
+          text="Vermifugado"
+          onPress={() => UpdateHealth(this.text, this.status)}
+        />
+        <CheckBox
+          text="Castrado"
+          onPress={() => UpdateHealth(this.text, this.status)}
+        />
+        <CheckBox
+          text="Doente"
+          onPress={() => UpdateHealth(this.text, this.status)}
+        />
       </View>
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
-        <Input placeholder="DOENCA DO ANIMAL" />
+        <Input
+          placeholder="DOENCA DO ANIMAL"
+          value={disease}
+          onChangeText={(disease) => setDisease(disease)}
+        />
       </View>
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24), width: '100%' }}>
         <Text style={{ color: '#f7a800' }}> EXIGENCIAS PARA ADOCAO </Text>
 
-        <CheckBox text="TERMOS DE ADOCAO" />
-        <CheckBox text="FOTOS DA CASA" />
-        <CheckBox text="VISITA PREVIA AO ANIMAL" />
-        <CheckBox text="ACOMPANHAMENTO POS ADOCAO" />
+        <CheckBox
+          text="TERMOS DE ADOCAO"
+          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+        />
+        <CheckBox
+          text="FOTOS DA CASA"
+          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+        />
+        <CheckBox
+          text="VISITA PREVIA AO ANIMAL"
+          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+        />
+        <CheckBox
+          text="ACOMPANHAMENTO POS ADOCAO"
+          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+        />
       </View>
       <Text style={{ paddingLeft: dp(24), paddingTop: dp(24) }}>
         SOBRE O ANIMAL
@@ -171,11 +297,13 @@ const RegisterScreen = () => {
       <Input
         placeholder="Compartilhar a historia do animal"
         style={{ paddingLeft: dp(24), paddingTop: dp(24) }}
+        value={description}
+        onChangeText={(description) => setDescription(description)}
       />
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
-          onPress={() => console.log('next page')}
+          onPress={() => handleRegister}
           styleTypho={{ color: '#434343' }}>
           COLOCAR PARA ADOCAO
         </Button>
