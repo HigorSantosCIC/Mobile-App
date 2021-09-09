@@ -49,7 +49,7 @@ const RegisterScreen = () => {
 
   const UpdateMood = (word, status) => {
     let aux = mood;
-    if (status == 'checked') {
+    if (status) {
       aux.push(word);
     } else {
       aux.splice(aux.indexOf(word), 1);
@@ -59,7 +59,7 @@ const RegisterScreen = () => {
 
   const UpdateHealth = (word, status) => {
     let aux = health;
-    if (status == 'checked') {
+    if (status) {
       aux.push(word);
     } else {
       aux.splice(aux.indexOf(word), 1);
@@ -69,7 +69,7 @@ const RegisterScreen = () => {
 
   const UpdateAdoptionNeeds = (word, status) => {
     let aux = adoptionNeeds;
-    if (status == 'checked') {
+    if (status) {
       aux.push(word);
     } else {
       aux.splice(aux.indexOf(word), 1);
@@ -184,27 +184,27 @@ const RegisterScreen = () => {
 
         <CheckBox
           text="Brincalhao"
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
         <CheckBox
           text="Timido"
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
         <CheckBox
           text="Calmo"
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
         <CheckBox
           text="Guarda "
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
         <CheckBox
           text="Amoroso "
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
         <CheckBox
           text="Preguicoso "
-          onPress={() => UpdateMood(this.text, this.status)}
+          onPress={(text, status) => UpdateMood(text, status)}
         />
       </View>
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
@@ -212,19 +212,19 @@ const RegisterScreen = () => {
 
         <CheckBox
           text="Vacinado"
-          onPress={() => UpdateHealth(this.text, this.status)}
+          onPress={(text, status) => UpdateHealth(text, status)}
         />
         <CheckBox
           text="Vermifugado"
-          onPress={() => UpdateHealth(this.text, this.status)}
+          onPress={(text, status) => UpdateHealth(text, status)}
         />
         <CheckBox
           text="Castrado"
-          onPress={() => UpdateHealth(this.text, this.status)}
+          onPress={(text, status) => UpdateHealth(text, status)}
         />
         <CheckBox
           text="Doente"
-          onPress={() => UpdateHealth(this.text, this.status)}
+          onPress={(text, status) => UpdateHealth(text, status)}
         />
       </View>
       <View style={{ paddingTop: dp(20), paddingLeft: dp(24) }}>
@@ -239,19 +239,19 @@ const RegisterScreen = () => {
 
         <CheckBox
           text="TERMOS DE ADOCAO"
-          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+          onPress={(text, status) => UpdateAdoptionNeeds(text, status)}
         />
         <CheckBox
           text="FOTOS DA CASA"
-          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+          onPress={(text, status) => UpdateAdoptionNeeds(text, status)}
         />
         <CheckBox
           text="VISITA PREVIA AO ANIMAL"
-          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+          onPress={(text, status) => UpdateAdoptionNeeds(text, status)}
         />
         <CheckBox
           text="ACOMPANHAMENTO POS ADOCAO"
-          onPress={() => UpdateAdoptionNeeds(this.text, this.status)}
+          onPress={(text, status) => UpdateAdoptionNeeds(text, status)}
         />
       </View>
       <Text style={{ paddingLeft: dp(24), paddingTop: dp(24) }}>

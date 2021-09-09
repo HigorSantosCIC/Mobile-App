@@ -12,10 +12,9 @@ export const create = async (props) => {
     mood,
     health,
     disease,
-    adoption_needs,
+    adoptionNeeds,
     description,
   } = props;
-  console.log(props);
   try {
     const currentUser = firebase.auth().currentUser;
 
@@ -31,7 +30,7 @@ export const create = async (props) => {
       mood: mood,
       health: health,
       disease: disease,
-      adoption_needs: adoption_needs,
+      adoption_needs: adoptionNeeds,
       description: description,
       is_adoption: false,
     });
