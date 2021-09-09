@@ -37,46 +37,37 @@ const RegisterScreen = () => {
       disease,
       adoptionNeeds,
       description,
-    ).then(() => navigation.push('Dashboard'));
+    ).then(() => navigation.navigate('Dashboard'));
   };
 
   const UpdateMood = (word, status) => {
-    let aux;
+    let aux = mood;
     if (status == 'checked') {
-      aux = mood;
       aux.push(word);
-      setMood(aux);
     } else {
-      aux = mood;
       aux.splice(aux.indexOf(word), 1);
-      setMood(aux);
     }
+    setMood(aux);
   };
 
   const UpdateHealth = (word, status) => {
-    let aux;
+    let aux = health;
     if (status == 'checked') {
-      aux = health;
       aux.push(word);
-      setHealth(aux);
     } else {
-      aux = health;
       aux.splice(aux.indexOf(word), 1);
-      setHealth(aux);
     }
+    setHealth(aux);
   };
 
   const UpdateAdoptionNeeds = (word, status) => {
-    let aux;
+    let aux = adoptionNeeds;
     if (status == 'checked') {
-      aux = adoptionNeeds;
       aux.push(word);
-      setAdoptionNeeds(aux);
     } else {
-      aux = adoptionNeeds;
       aux.splice(aux.indexOf(word), 1);
-      setAdoptionNeeds(aux);
     }
+    setAdoptionNeeds(aux);
   };
 
   return (
@@ -251,7 +242,7 @@ const RegisterScreen = () => {
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
-          onPress={() => handleRegister}
+          onPress={handleRegister}
           styleTypho={{ color: '#434343' }}>
           COLOCAR PARA ADOCAO
         </Button>

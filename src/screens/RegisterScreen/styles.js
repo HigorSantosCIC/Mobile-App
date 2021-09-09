@@ -3,11 +3,13 @@ import { dp } from '../../constants/Spacing';
 
 export const RegisterFormContainer = styled.View`
   margin-top: ${dp(64)}px;
-  padding-horizontal: ${dp(16)}px;
+  padding-left: ${dp(16)}px;
+  padding-right: ${dp(16)}px;
 `;
 
 export const TextContainer = styled.View`
-  padding-horizontal: ${dp(16)}px;
+  padding-left: ${dp(16)}px;
+  padding-right: ${dp(16)}px;
   margin-top: ${dp(20)}px;
   align-items: center;
 `;
