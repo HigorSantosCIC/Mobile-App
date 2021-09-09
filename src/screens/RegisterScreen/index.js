@@ -2,20 +2,13 @@ import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
-import {
-  TextContainer,
-  ButtonContainer,
-  IconContainer,
-  ViewContainer,
-} from './styles';
+import { TextContainer, ButtonContainer } from './styles';
 import CheckBox from '../../components/CheckBox';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import SelectOption from '../../components/SelectOption';
-import { AntDesign } from '@expo/vector-icons';
+import ImageUploader from '../../components/ImageUploader';
 import { dataIdade, dataPorte, dataSexo, dataEspecie } from './utils/select';
-import firebase from 'firebase';
-import * as ImagePicker from 'expo-image-picker';
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 
@@ -27,7 +20,7 @@ const RegisterScreen = () => {
   const [size, setSize] = useState('');
   const [age, setAge] = useState('');
   const [mood, setMood] = useState([]);
-  const [health, setHealth] = useState('[]');
+  const [health, setHealth] = useState([]);
   const [disease, setDisease] = useState('');
   const [adoptionNeeds, setAdoptionNeeds] = useState([]);
   const [description, setDescription] = useState('');
@@ -86,41 +79,6 @@ const RegisterScreen = () => {
     }
   };
 
-  const [id, setId] = useState(0);
-
-  const onPressAdocao = () => {
-    setFluxo('ADOÇÃO');
-    console.log('ADOCAO');
-  };
-
-  async function UploadScreen() {
-    console.log('printando porq funfou');
-    const pickerResult = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [1, 1],
-    });
-
-    const blob = await new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        resolve(xhr.response);
-      };
-      xhr.onerror = function () {
-        reject(new TypeError('Network request failed'));
-      };
-      xhr.responseType = 'blob';
-      xhr.open('GET', pickerResult.uri, true);
-      xhr.send(null);
-    });
-    const ref = firebase.storage().ref().child(`images/${id}`);
-    setId(id + 1);
-    const snapshot = await ref.put(blob, { contentType: 'image/png' });
-    const remoteURL = await snapshot.ref.getDownloadURL();
-    return remoteURL;
-  }
-
-  const [fluxo, setFluxo] = useState('ADOÇÃO');
-
   return (
     <ScrollView>
       <TextContainer>
@@ -139,7 +97,6 @@ const RegisterScreen = () => {
         <Button
           style={{ borderRadius: dp(2) }}
           color={theme.colors.secondary}
-          onPress={onPressAdocao}
           styleTypho={{ color: '#434343' }}>
           ADOÇÃO
         </Button>
@@ -150,9 +107,7 @@ const RegisterScreen = () => {
           color: '#434343',
           paddingTop: dp(16),
           paddingLeft: dp(24),
-        }}>
-        {fluxo}
-      </Text>
+        }}></Text>
       <View style={{ marginTop: dp(24), paddingLeft: dp(24) }}>
         <Text> NOME DO ANIMAL</Text>
         <Input
@@ -171,16 +126,7 @@ const RegisterScreen = () => {
         <Text> FOTOS DO ANIMAL</Text>
       </View>
       {/* Botao de adicionar fotos */}
-      <TouchableHighlight onPress={UploadScreen}>
-        <ViewContainer>
-          <View style={{ height: dp(128), width: dp(312) }}>
-            <IconContainer style={{ paddingTop: dp(44), paddingBottom: dp(48) }}>
-              <AntDesign name="pluscircleo" size={24} color="black" />
-              <Text> adicionar fotos</Text>
-            </IconContainer>
-          </View>
-        </ViewContainer>
-      </TouchableHighlight>
+      <ImageUploader id="1" folder="animals" />
 
       <View
         style={{
