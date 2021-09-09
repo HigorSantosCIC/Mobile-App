@@ -29,6 +29,7 @@ export const create = async (
       userName: userName,
     });
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };

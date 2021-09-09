@@ -1,13 +1,13 @@
 import { Text, View, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
-import Input from '../../components/Input';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
-import { SignupFormContainer, SignupFormTitle } from './styles';
+import { SignupFormContainer, SignupFormTitle, Input } from './styles';
 import Button from '../../components/Button';
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 import ImageUploader from '../../components/ImageUploader';
+import Typography from '../../components/Typography';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -60,55 +60,48 @@ const SignUpScreen = () => {
         </View>
 
         <SignupFormTitle>
-          <Text>INFORMAÇÕES PESSOAIS</Text>
+          <Typography>INFORMAÇÕES PESSOAIS</Typography>
         </SignupFormTitle>
 
         <SignupFormContainer>
           <Input
             placeholder="Nome completo"
-            style={{ marginTop: dp(20) }}
             value={fullName}
             onChangeText={(fullName) => setFullName(fullName)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Idade"
-            style={{ marginTop: dp(20) }}
             value={age}
             onChangeText={(age) => setAge(age)}
             autoCapitalize="none"
           />
           <Input
             placeholder="E-mail"
-            style={{ marginTop: dp(20) }}
             value={email}
             onChangeText={(email) => setEmail(email)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Estado"
-            style={{ marginTop: dp(20) }}
             value={state}
             onChangeText={(state) => setState(state)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Cidade"
-            style={{ marginTop: dp(20) }}
             value={city}
             onChangeText={(city) => setCity(city)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Endereço"
-            style={{ marginTop: dp(20) }}
             value={address}
             onChangeText={(address) => setAddress(address)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Telefone"
-            style={{ marginTop: dp(20) }}
             value={phone}
             onChangeText={(phone) => setPhone(phone)}
             autoCapitalize="none"
@@ -120,21 +113,18 @@ const SignUpScreen = () => {
 
           <Input
             placeholder="Nome de usuário"
-            style={{ marginTop: dp(20) }}
             value={userName}
             onChangeText={(userName) => setUserName(userName)}
             autoCapitalize="none"
           />
           <Input
             placeholder="Senha"
-            style={{ marginTop: dp(20) }}
             value={password}
             onChangeText={(password) => setPassword(password)}
             secureTextEntry={true}
           />
           <Input
             placeholder="Confirmação de senha"
-            style={{ marginTop: dp(20) }}
             value={passwordConfirmation}
             onChangeText={(passwordConfirmation) =>
               setPasswordConfirmation(passwordConfirmation)
@@ -147,12 +137,19 @@ const SignUpScreen = () => {
           </SignupFormTitle>
           <ImageUploader id={userName} folder="users" />
         </SignupFormContainer>
-        <Button
-          color={theme.colors.primary}
-          onPress={handleSignup}
-          styleTypho={{ color: '#434343' }}>
-          FAZER CADASTRO
-        </Button>
+        <View
+          style={{
+            paddingTop: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Button
+            color={theme.colors.primary}
+            onPress={handleSignup}
+            styleTypho={{ color: '#434343' }}>
+            FAZER CADASTRO
+          </Button>
+        </View>
       </View>
     </ScrollView>
   );
