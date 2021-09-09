@@ -126,7 +126,7 @@ const RegisterScreen = () => {
         <Text> FOTOS DO ANIMAL</Text>
       </View>
       {/* Botao de adicionar fotos */}
-      <ImageUploader id="1" folder="animals" />
+      <ImageUploader id={name} folder="animals" />
 
       <View
         style={{

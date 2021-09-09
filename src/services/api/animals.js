@@ -19,7 +19,7 @@ export const create = async (
 
     const db = firebase.firestore();
     db.collection('animals').doc(currentUser.uid).set({
-      owner_id: currentUser.id,
+      owner_id: currentUser.uid,
       name: name,
       species: species,
       sex: sex,
@@ -32,7 +32,8 @@ export const create = async (
       description: description,
     });
   } catch (err) {
-    Alert.alert('There is something wrong!!!!', err.message);
+    console.log(err);
+    throw err;
   }
 };
 
