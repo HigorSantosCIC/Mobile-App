@@ -12,10 +12,11 @@ import { theme } from '../../constants/Theme';
 import { dp } from '../../constants/Spacing';
 
 const DrawerContent = (props) => {
-  let currentUserUID = firebase.auth().currentUser.uid;
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    let currentUserUID = firebase.auth().currentUser.uid;
     api.Users.show(currentUserUID).then((user) => setUser(user));
   }, []);
 

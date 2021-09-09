@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import RadioGroup from 'react-native-radio-buttons-group';
 
-const SelectOption = ({ radioButtonsData }) => {
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-
-  function onPressRadioButton(radioButtonsArray) {
-    setRadioButtons(radioButtonsArray);
-  }
-
+const SelectOption = ({ radioButtonsData, onPress }) => {
   return (
     <RadioGroup
       layout="row"
-      radioButtons={radioButtons}
-      onPress={onPressRadioButton}
+      radioButtons={radioButtonsData}
+      onPress={onPress}
     />
   );
 };

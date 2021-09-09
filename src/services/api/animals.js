@@ -2,23 +2,26 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { Alert } from 'react-native';
 
-export const create = async (
-  name,
-  species,
-  sex,
-  size,
-  age,
-  mood,
-  health,
-  disease,
-  adoption_needs,
-  description,
-) => {
+export const create = async (props) => {
+  const {
+    name,
+    species,
+    sex,
+    size,
+    age,
+    mood,
+    health,
+    disease,
+    adoption_needs,
+    description,
+  } = props;
+  console.log(props);
   try {
     const currentUser = firebase.auth().currentUser;
 
     const db = firebase.firestore();
-    db.collection('animals').doc(currentUser.uid).set({
+
+    db.collection('animals').add({
       owner_id: currentUser.uid,
       name: name,
       species: species,
@@ -30,6 +33,7 @@ export const create = async (
       disease: disease,
       adoption_needs: adoption_needs,
       description: description,
+      is_adoption: false,
     });
   } catch (err) {
     console.log(err);

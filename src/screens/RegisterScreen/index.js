@@ -1,4 +1,4 @@
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
@@ -26,7 +26,7 @@ const RegisterScreen = () => {
   const [description, setDescription] = useState('');
 
   const handleRegister = () => {
-    api.Animals.create(
+    api.Animals.create({
       name,
       species,
       sex,
@@ -37,7 +37,14 @@ const RegisterScreen = () => {
       disease,
       adoptionNeeds,
       description,
-    ).then(() => navigation.navigate('Dashboard'));
+    })
+      .then(() => {
+        Alert.alert('Animal cadastrado com sucesso');
+        navigation.navigate('Dashboard');
+      })
+      .catch((err) =>
+        Alert.alert('Não foi possível cadastrar o animal', err.message),
+      );
   };
 
   const UpdateMood = (word, status) => {
@@ -92,13 +99,6 @@ const RegisterScreen = () => {
           ADOÇÃO
         </Button>
       </ButtonContainer>
-      <Text
-        style={{
-          fontSize: dp(16),
-          color: '#434343',
-          paddingTop: dp(16),
-          paddingLeft: dp(24),
-        }}></Text>
       <View style={{ marginTop: dp(24), paddingLeft: dp(24) }}>
         <Text> NOME DO ANIMAL</Text>
         <Input
@@ -127,7 +127,13 @@ const RegisterScreen = () => {
         <Text style={{ color: '#f7a800' }}> ESPECIE </Text>
         <SelectOption
           radioButtonsData={dataEspecie}
-          onPress={() => setSpecies(dataEspecie.label)}
+          onPress={(data) => {
+            data.forEach((d) => {
+              if (d.selected) {
+                setSpecies(d.label);
+              }
+            });
+          }}
         />
       </View>
 
@@ -135,7 +141,13 @@ const RegisterScreen = () => {
         <Text style={{ color: '#f7a800' }}> SEXO </Text>
         <SelectOption
           radioButtonsData={dataSexo}
-          onPress={() => setSex(dataSexo.label)}
+          onPress={(data) =>
+            data.forEach((d) => {
+              if (d.selected) {
+                setSex(d.label);
+              }
+            })
+          }
         />
       </View>
 
@@ -143,7 +155,13 @@ const RegisterScreen = () => {
         <Text style={{ color: '#f7a800' }}> PORTE </Text>
         <SelectOption
           radioButtonsData={dataPorte}
-          onPress={() => setSize(dataPorte.label)}
+          onPress={(data) =>
+            data.forEach((d) => {
+              if (d.selected) {
+                setSize(d.label);
+              }
+            })
+          }
         />
       </View>
 
@@ -151,7 +169,13 @@ const RegisterScreen = () => {
         <Text style={{ color: '#f7a800' }}> IDADE </Text>
         <SelectOption
           radioButtonsData={dataIdade}
-          onPress={() => setAge(dataIdade.label)}
+          onPress={(data) =>
+            data.forEach((d) => {
+              if (d.selected) {
+                setAge(d.label);
+              }
+            })
+          }
         />
       </View>
 
