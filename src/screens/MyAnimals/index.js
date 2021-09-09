@@ -27,6 +27,7 @@ const MyAnimals = () => {
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
       <FlatList
+        style={{ flexGrow: 1 }}
         data={animals}
         renderItem={(animal) => {
           return <AnimalAdoption {...animal.item} key={animal.index} />;
