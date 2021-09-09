@@ -2,15 +2,31 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { Alert } from 'react-native';
 
-export const create = async (email, password, name) => {
+export const create = async (
+  fullName,
+  age,
+  email,
+  state,
+  city,
+  address,
+  phone,
+  userName,
+  password,
+) => {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
 
     const db = firebase.firestore();
     db.collection('users').doc(currentUser.uid).set({
-      email: currentUser.email,
-      name: name,
+      fullName: fullName,
+      age: age,
+      email: email,
+      state: state,
+      city: city,
+      address: address,
+      phone: phone,
+      userName: userName,
     });
   } catch (err) {
     Alert.alert('There is something wrong!!!!', err.message);
