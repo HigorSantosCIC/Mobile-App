@@ -12,7 +12,6 @@ import { theme } from '../../constants/Theme';
 import { dp } from '../../constants/Spacing';
 
 const DrawerContent = (props) => {
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -37,7 +36,7 @@ const DrawerContent = (props) => {
             paddingLeft: 5,
             paddingBottom: 5,
           }}>
-          {user && user.name}
+          {user && user.userName}
         </Typography>
       </View>
       <DrawerItemList {...props} />
