@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
 
-const DashboardScreen = () => {
+const DashboardScreen = ({ navigation }) => {
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       <View
