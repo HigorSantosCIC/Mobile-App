@@ -8,7 +8,6 @@ import * as ImagePicker from 'expo-image-picker';
 
 const ImageUploader = ({ id, folder }) => {
   async function UploadImage(id, folder) {
-    console.log('oi');
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [1, 1],

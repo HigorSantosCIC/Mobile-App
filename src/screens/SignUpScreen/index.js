@@ -1,4 +1,4 @@
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
 import Input from '../../components/Input';
 import { dp } from '../../constants/Spacing';
@@ -33,7 +33,11 @@ const SignUpScreen = () => {
       phone,
       userName,
       password,
-    ).then(() => navigation.push('Dashboard'));
+    )
+      .then(() => navigation.push('Logged'))
+      .catch((err) =>
+        Alert.alert('Não foi possível realizar o cadastro', err.message),
+      );
   };
 
   return (

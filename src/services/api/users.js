@@ -29,7 +29,7 @@ export const create = async (
       userName: userName,
     });
   } catch (err) {
-    Alert.alert('There is something wrong!!!!', err.message);
+    throw err;
   }
 };
 
