@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   FooterCityContainer,
@@ -10,8 +10,20 @@ import Typography from '../Typography';
 import { FontAwesome } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
+import firebase from 'firebase';
 
 const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
+  const getImage = async () => {
+    const ref = firebase.storage().ref().child(`images/animals/${name}`);
+    const remoteURL = await ref.getDownloadURL();
+    setImageUrl(remoteURL);
+  };
+
+  useEffect(() => {
+    getImage();
+  }, []);
+  const [imageUrl, setImageUrl] = useState('');
+
   return (
     <Container>
       <Header>
@@ -20,7 +32,9 @@ const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
       </Header>
 
       <Image
-        source={{ uri: picture }}
+        source={{
+          uri: imageUrl,
+        }}
         style={{ height: dp(183), width: '100%' }}
       />
 
