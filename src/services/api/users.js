@@ -52,9 +52,16 @@ export const show = async (id) => {
   });
 };
 
+export const getAdress = async (user_id) => {
+  const db = firebase.firestore();
+  const user = await db.collection('users').doc(user_id).get();
+  return user.address;
+};
+
 const Users = {
   create,
   show,
+  getAdress,
 };
 
 export default Users;
