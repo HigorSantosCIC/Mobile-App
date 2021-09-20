@@ -1,60 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  FlatList,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import api from '../../services/api';
-import AnimalAdoption from '../../components/AnimalAdoption';
+import { ActivityIndicator, Alert, View, Text } from 'react-native';
 import firebase from 'firebase';
+import api from '../../services/api';
 import { theme } from '../../constants/Theme';
+import { useNavigation } from '@react-navigation/native';
+import Button from '../../components/Button';
+import { TextContainer, ButtonContainer } from './styles';
 
 const ShowAnimal = ({ animal }) => {
-  const [animals, setAnimals] = useState([]);
-  const [loading, setLoading] = useState(true);
+  console.log(animal);
+  const [animalAddress, setAnimalAdress] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
+
+  const navigation = useNavigation();
 
   useEffect(() => {
-    getAnimal();
+    setAnimalAdress(api.Users.getAdress(animal.owner));
   }, []);
 
-  const getAnimal = (animal.id) => {
-    setLoading(true);
-    api.Animals.show({ id })
-      .then((r) => {
-        setAnimals(r);
-      })
-      .finally(() => setLoading(false));
-  };
+  const handleAdoption = () => {
+    setCurrentUser(firebase.auth().currentUser.uid);
 
-  const adopt = (animal) => {
-    let currentUserUID = firebase.auth().currentUser.uid;
-    if (!currentUserUID) {
-      return Alert.alert('Você precisa está logado para adotar');
+    if (!currentUser) {
+      return Alert.alert('Você precisa estar logado para adotar');
     }
 
-    api.Animals.adopt(animal.item.id, currentUserUID)
+    api.Animals.adopt(animal.id, currentUser)
       .then(() => Alert.alert('Animal adotado com sucesso'))
-      .catch((e) => Alert.alert('Não foi possível adoptar', e))
-      .finally(() => getAnimal(id));
+      .catch((e) => Alert.alert('Não foi possível adotar', e))
+      .finally(() => navigation.navigate('MyAnimals'));
   };
+
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
-      {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
-      <FlatList
-        data={animals}
-        renderItem={(animal) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                adopt(animal);
-              }}>
-              <AnimalAdoption {...animal.item} key={animal.index} />
-            </TouchableOpacity>
-          );
-        }}
-      />
+      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <Text>{animal.name}</Text>
+      <Text>{animal.sex}</Text>
+      <Text>{animal.age}</Text>
+      <Text>{animalAddress}</Text>
+      <Text>{animal.health}</Text>
+      <Text>{animal.disease}</Text>
+      <Text>{animal.mood}</Text>
+      <Text>{animal.adoptionNeeds}</Text>
+      <Text>{animal.descriptrion}</Text>
+      <ButtonContainer>
+        <Button
+          color={theme.colors.secondary}
+          onPress={() => handleAdoption}
+          styleTypho={{ color: '#434343' }}>
+          pretendo adotar
+        </Button>
+      </ButtonContainer>
     </View>
   );
 };
