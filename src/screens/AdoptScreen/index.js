@@ -1,16 +1,14 @@
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
 import AnimalAdoption from '../../components/AnimalAdoption';
-import firebase from 'firebase';
 import { theme } from '../../constants/Theme';
 import { useNavigation } from '@react-navigation/native';
+import api from '../../services/api';
 
 const AdoptScreen = () => {
   const [animals, setAnimals] = useState([]);

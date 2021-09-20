@@ -5,7 +5,7 @@ import api from '../../services/api';
 import { theme } from '../../constants/Theme';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/Button';
-import { TextContainer, ButtonContainer } from './styles';
+import { ButtonContainer } from './styles';
 
 const ShowAnimal = ({ animal }) => {
   console.log(animal);
