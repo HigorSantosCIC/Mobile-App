@@ -4,14 +4,17 @@ import firebase from 'firebase';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import { theme } from '../../constants/Theme';
 import Typography from '../../components/Typography';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchNotifications();
+    }, []),
+  );
 
   const fetchNotifications = () => {
     setLoading(true);

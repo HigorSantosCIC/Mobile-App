@@ -33,10 +33,13 @@ const AdoptScreen = () => {
     if (!currentUserUID) {
       return Alert.alert('Você precisa está logado para adotar');
     }
-    api.AdoptionRequest.create(animal.item.id, currentUserUID)
+    api.AdoptionRequest.create(
+      animal.item.id,
+      animal.item.owner_id,
+      currentUserUID,
+    )
       .then(() => Alert.alert('Foi requisitado a adoção para o dono'))
-      .catch((e) => Alert.alert('Não foi possível requisitar a adoção', e))
-      .finally(() => fetchAnimals());
+      .catch(() => Alert.alert('Não foi possível requisitar a adoção'));
   };
 
   return (
