@@ -11,8 +11,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
 import firebase from 'firebase';
+import { Navigation } from '@react-navigation/native';
 
-const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
+const AnimalAdoption = ({ name, sexo, idade, porte, place }) => {
+  const [imageUrl, setImageUrl] = useState('');
+
+  const navigation = Navigation;
+
   const getImage = async () => {
     const ref = firebase.storage().ref().child(`images/animals/${name}`);
     const remoteURL = await ref.getDownloadURL();
@@ -22,7 +27,6 @@ const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
   useEffect(() => {
     getImage();
   }, []);
-  const [imageUrl, setImageUrl] = useState('');
 
   return (
     <Container>
