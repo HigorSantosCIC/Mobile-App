@@ -10,23 +10,13 @@ import Typography from '../../components/Typography';
 const ShowAnimal = ({ route, navigation }) => {
   const { animal } = route.params;
 
-  console.log('>> animal');
-  console.log(animal);
-
-  console.log('>> animal[name]');
-  console.log(animal['name']);
-
-  console.log('>> animal.name');
-  console.log(animal.name);
-
-  const [animalAddress, setAnimalAdress] = useState('');
+  const [animalAddress, setAnimalAddress] = useState('');
   const [currentUser, setCurrentUser] = useState('');
 
   useEffect(() => {
-    setAnimalAdress(api.Users.getAdress(animal['owner_id']));
-
-    console.log('>> animal adress');
-    console.log(animalAddress);
+    api.Users.getAddress(animal.owner_id).then((ownerAddress) =>
+      setAnimalAddress(ownerAddress),
+    );
   }, []);
 
   const handleAdoption = () => {
@@ -45,15 +35,15 @@ const ShowAnimal = ({ route, navigation }) => {
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       <ActivityIndicator size="large" color={theme.colors.primary} />
-      <Typography>{animal['name']}</Typography>
-      <Typography>{animal['sex']}</Typography>
-      <Typography>{animal['age']}</Typography>
-      {/* <Typography>{animalAddress}</Typography> */}
-      <Typography>{animal['health']}</Typography>
-      <Typography>{animal['disease']}</Typography>
-      <Typography>{animal['mood']}</Typography>
-      <Typography>{animal['adoptionNeeds']}</Typography>
-      <Typography>{animal['descriptrion']}</Typography>
+      <Typography>{animal.name}</Typography>
+      <Typography>{animal.sex}</Typography>
+      <Typography>{animal.age}</Typography>
+      <Typography>{animalAddress}</Typography>
+      <Typography>{animal.health}</Typography>
+      <Typography>{animal.disease}</Typography>
+      <Typography>{animal.mood}</Typography>
+      <Typography>{animal.adoptionNeeds}</Typography>
+      <Typography>{animal.descriptrion}</Typography>
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
