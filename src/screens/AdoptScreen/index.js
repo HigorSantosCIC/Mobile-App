@@ -38,7 +38,7 @@ const AdoptScreen = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('ShowAnimal', { animal });
+                navigation.navigate('ShowAnimal', { animal: animal });
               }}>
               <AnimalAdoption {...animal.item} key={animal.index} />
             </TouchableOpacity>
