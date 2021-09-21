@@ -12,7 +12,7 @@ import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
 import firebase from 'firebase';
 
-const AnimalAdoption = ({ name, sexo, idade, porte, place }) => {
+const AnimalAdoption = ({ name, sex, age, size, place }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   const getImage = async () => {
@@ -40,9 +40,9 @@ const AnimalAdoption = ({ name, sexo, idade, porte, place }) => {
       />
 
       <FooterInfo>
-        <FooterTypography>{sexo}</FooterTypography>
-        <FooterTypography>{idade}</FooterTypography>
-        <FooterTypography>{porte}</FooterTypography>
+        <FooterTypography>{sex}</FooterTypography>
+        <FooterTypography>{age}</FooterTypography>
+        <FooterTypography>{size}</FooterTypography>
       </FooterInfo>
       <FooterCityContainer>
         <FooterTypography>{place}</FooterTypography>
