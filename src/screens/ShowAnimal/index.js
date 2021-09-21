@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import { ButtonContainer } from './styles';
 import Typography from '../../components/Typography';
 
-const ShowAnimal = ({ route, navigation }) => {
+const ShowAnimal = ({ route }) => {
   const { animal } = route.params;
 
   const [animalAddress, setAnimalAddress] = useState('');
