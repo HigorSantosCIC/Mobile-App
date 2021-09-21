@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, View } from 'react-native';
+import { ActivityIndicator, Alert, View, Text } from 'react-native';
 import firebase from 'firebase';
 import api from '../../services/api';
 import { theme } from '../../constants/Theme';
@@ -35,14 +35,35 @@ const ShowAnimal = ({ route, navigation }) => {
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       <ActivityIndicator size="large" color={theme.colors.primary} />
+
+      <Text style={{ color: '#f7a800' }}>NOME</Text>
       <Typography>{animal.name}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>SEXO</Text>
       <Typography>{animal.sex}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>PORTE</Text>
+      <Typography>{animal.size}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>IDADE</Text>
       <Typography>{animal.age}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>LOCALIZAÇÃO</Text>
       <Typography>{animalAddress}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>SAÚDE</Text>
       <Typography>{animal.health}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>DOENÇAS</Text>
       <Typography>{animal.disease}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>TEMPERAMENTO</Text>
       <Typography>{animal.mood}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>NECESSIDADES DE ADOÇAO</Text>
       <Typography>{animal.adoptionNeeds}</Typography>
+
+      <Text style={{ color: '#f7a800' }}>SOBRE</Text>
       <Typography>{animal.descriptrion}</Typography>
       <ButtonContainer>
         <Button
