@@ -12,7 +12,7 @@ import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
 import firebase from 'firebase';
 
-const AnimalAdoption = ({ name, sexo, idade, porte, picture, place }) => {
+const AnimalAdoption = ({ name, sexo, idade, porte, place }) => {
   const getImage = async () => {
     const ref = firebase.storage().ref().child(`images/animals/${name}`);
     const remoteURL = await ref.getDownloadURL();

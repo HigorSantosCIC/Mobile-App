@@ -8,7 +8,6 @@ import api from '../../services/api';
 import firebase from 'firebase';
 import { View, Image } from 'react-native';
 import Typography from '../Typography';
-import { theme } from '../../constants/Theme';
 import { dp } from '../../constants/Spacing';
 const DrawerContent = (props) => {
   const [user, setUser] = useState(null);

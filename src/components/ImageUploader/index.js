@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, TouchableHighlight, Image } from 'react-native';
+import React from 'react';
+import { Text, View, TouchableHighlight } from 'react-native';
 import { IconContainer, ViewContainer } from './styles';
 import firebase from 'firebase';
 import { dp } from '../../constants/Spacing';
