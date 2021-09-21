@@ -103,6 +103,7 @@ export const adopt = async (animalId, newOwnerId) => {
 };
 
 export const myAnimals = async ({ currentUserId }) => {
+  console.log(currentUserId);
   return new Promise((resolve, reject) => {
     firebase
       .firestore()

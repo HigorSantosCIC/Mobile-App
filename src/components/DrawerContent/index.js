@@ -9,8 +9,10 @@ import firebase from 'firebase';
 import { View, Image } from 'react-native';
 import Typography from '../Typography';
 import { dp } from '../../constants/Spacing';
+
 const DrawerContent = (props) => {
   const [user, setUser] = useState(null);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     let currentUserUID = firebase.auth().currentUser.uid;
@@ -18,10 +20,10 @@ const DrawerContent = (props) => {
   }, []);
 
   useEffect(() => {
-    getImage();
+    if (user) {
+      getImage();
+    }
   }, [user]);
-
-  const [image, setImage] = useState('');
 
   const getImage = async () => {
     const ref = firebase.storage().ref().child(`images/users/${user.userName}`);
@@ -39,10 +41,12 @@ const DrawerContent = (props) => {
           justifyContent: 'center',
         }}>
         <View>
-          <Image
-            style={{ height: dp(150), width: 'auto' }}
-            source={{ uri: image }}
-          />
+          {image && (
+            <Image
+              style={{ height: dp(150), width: 'auto' }}
+              source={{ uri: image }}
+            />
+          )}
           <Typography
             weight="medium"
             style={{
