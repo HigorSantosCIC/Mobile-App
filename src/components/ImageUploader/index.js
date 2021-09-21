@@ -1,12 +1,12 @@
-import React from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, TouchableHighlight, Image } from 'react-native';
 import { IconContainer, ViewContainer } from './styles';
 import firebase from 'firebase';
 import { dp } from '../../constants/Spacing';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
-const ImageUploader = ({ id, folder }) => {
+const ImageUploader = ({ id, folder, callBack }) => {
   async function UploadImage(id, folder) {
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -32,6 +32,7 @@ const ImageUploader = ({ id, folder }) => {
 
     const snapshot = await ref.put(blob, { contentType: 'image/png' });
     const remoteURL = await snapshot.ref.getDownloadURL();
+    callBack(remoteURL);
     return remoteURL;
   }
   return (
