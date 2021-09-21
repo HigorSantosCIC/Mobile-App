@@ -7,7 +7,9 @@ import SignUpScreen from '../screens/SignUpScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import AdoptScreen from '../screens/AdoptScreen';
 import LoggedNavigator from './logged';
+import ShowAnimal from '../screens/ShowAnimal';
 import { theme } from '../constants/Theme';
+import MyAnimals from '../screens/MyAnimals';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +44,12 @@ const Navigator = () => {
           component={LoggedNavigator}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="ShowAnimal"
+          component={ShowAnimal}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="MyAnimals" component={MyAnimals} />
       </Stack.Navigator>
     </NavigationContainer>
   );

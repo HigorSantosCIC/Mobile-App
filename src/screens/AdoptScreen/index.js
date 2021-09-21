@@ -1,19 +1,20 @@
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
 import AnimalAdoption from '../../components/AnimalAdoption';
-import firebase from 'firebase';
 import { theme } from '../../constants/Theme';
+import { useNavigation } from '@react-navigation/native';
+import api from '../../services/api';
 
 const AdoptScreen = () => {
   const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchAnimals();
@@ -28,17 +29,6 @@ const AdoptScreen = () => {
       .finally(() => setLoading(false));
   };
 
-  const adopt = (animal) => {
-    let currentUserUID = firebase.auth().currentUser.uid;
-    if (!currentUserUID) {
-      return Alert.alert('Você precisa está logado para adotar');
-    }
-
-    api.Animals.adopt(animal.item.id, currentUserUID)
-      .then(() => Alert.alert('Animal adotado com sucesso'))
-      .catch((e) => Alert.alert('Não foi possível adoptar', e))
-      .finally(() => fetchAnimals());
-  };
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
@@ -48,7 +38,7 @@ const AdoptScreen = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                adopt(animal);
+                navigation.navigate('ShowAnimal', { animal: animal.item });
               }}>
               <AnimalAdoption {...animal.item} key={animal.index} />
             </TouchableOpacity>
