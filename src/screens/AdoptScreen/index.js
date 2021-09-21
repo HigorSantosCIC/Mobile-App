@@ -1,19 +1,20 @@
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
 import AnimalAdoption from '../../components/AnimalAdoption';
-import firebase from 'firebase';
 import { theme } from '../../constants/Theme';
+import { useNavigation } from '@react-navigation/native';
+import api from '../../services/api';
 
 const AdoptScreen = () => {
   const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchAnimals();
@@ -52,6 +53,7 @@ const AdoptScreen = () => {
             <TouchableOpacity
               onPress={() => {
                 adoptRequest(animal);
+                navigation.navigate('ShowAnimal', { animal: animal.item });
               }}>
               <AnimalAdoption {...animal.item} key={animal.index} />
             </TouchableOpacity>

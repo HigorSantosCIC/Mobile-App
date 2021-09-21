@@ -30,7 +30,7 @@ export const create = async (props) => {
       mood: mood,
       health: health,
       disease: disease,
-      adoption_needs: adoptionNeeds,
+      adoptionNeeds: adoptionNeeds,
       description: description,
       is_adoption: false,
     });

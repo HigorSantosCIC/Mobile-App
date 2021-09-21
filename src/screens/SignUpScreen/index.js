@@ -1,5 +1,5 @@
-import { Text, View, ScrollView, Alert } from 'react-native';
-import React, { useState } from 'react';
+import { Text, View, ScrollView, Alert, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
 import { SignupFormContainer, SignupFormTitle, Input } from './styles';
@@ -21,6 +21,7 @@ const SignUpScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [image, setImage] = useState('');
 
   const handleSignup = () => {
     api.Users.create(
@@ -39,6 +40,10 @@ const SignUpScreen = () => {
         Alert.alert('Não foi possível realizar o cadastro', err.message),
       );
   };
+
+  useEffect(() => {
+    console.log('URL da image:', image);
+  }, [image]);
 
   return (
     <ScrollView>
@@ -106,11 +111,9 @@ const SignUpScreen = () => {
             onChangeText={(phone) => setPhone(phone)}
             autoCapitalize="none"
           />
-
           <SignupFormTitle>
             <Text marginTop={dp(80)}>INFORMAÇÕES DE PERFIL</Text>
           </SignupFormTitle>
-
           <Input
             placeholder="Nome de usuário"
             value={userName}
@@ -131,12 +134,21 @@ const SignUpScreen = () => {
             }
             secureTextEntry={true}
           />
-
           <SignupFormTitle>
             <Text>FOTO DE PERFIL</Text>
           </SignupFormTitle>
-          <ImageUploader id={userName} folder="users" />
+          <ImageUploader id={userName} folder="users" callBack={setImage} />
+          <Image
+            style={{
+              height: dp(180),
+              width: null,
+            }}
+            source={{
+              uri: image,
+            }}
+          />
         </SignupFormContainer>
+
         <View
           style={{
             paddingTop: 20,

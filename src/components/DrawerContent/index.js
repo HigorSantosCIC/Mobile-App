@@ -6,11 +6,9 @@ import {
 } from '@react-navigation/drawer';
 import api from '../../services/api';
 import firebase from 'firebase';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import Typography from '../Typography';
-import { theme } from '../../constants/Theme';
 import { dp } from '../../constants/Spacing';
-
 const DrawerContent = (props) => {
   const [user, setUser] = useState(null);
 
@@ -19,26 +17,45 @@ const DrawerContent = (props) => {
     api.Users.show(currentUserUID).then((user) => setUser(user));
   }, []);
 
+  useEffect(() => {
+    getImage();
+  }, [user]);
+
+  const [image, setImage] = useState('');
+
+  const getImage = async () => {
+    const ref = firebase.storage().ref().child(`images/users/${user.userName}`);
+    const remoteURL = await ref.getDownloadURL();
+    setImage(remoteURL);
+  };
+
   return (
     <DrawerContentScrollView {...props}>
       <View
         style={{
-          height: dp(150),
-          backgroundColor: theme.colors.primary,
-          flexDirection: 'row',
+          height: dp(180),
+          // backgroundColor: theme.colors.primary,
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}>
-        <Typography
-          weight="medium"
-          style={{
-            fontSize: 14,
-            color: '#434343',
-            alignSelf: 'flex-end',
-            paddingLeft: 5,
-            paddingBottom: 5,
-          }}>
-          {user && user.userName}
-        </Typography>
+        <View>
+          <Image
+            style={{ height: dp(150), width: 'auto' }}
+            source={{ uri: image }}
+          />
+          <Typography
+            weight="medium"
+            style={{
+              fontSize: 14,
+              color: '#434343',
+              alignSelf: 'flex-start',
+              padding: 10,
+            }}>
+            {user && user.userName}
+          </Typography>
+        </View>
       </View>
+
       <DrawerItemList {...props} />
       <DrawerItem label="Adotar" onPress={() => props.navigation.push('Adopt')} />
       <DrawerItem
