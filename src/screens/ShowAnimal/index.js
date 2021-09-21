@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, View, Text } from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
 import firebase from 'firebase';
 import api from '../../services/api';
 import { theme } from '../../constants/Theme';
 import Button from '../../components/Button';
 import { ButtonContainer } from './styles';
+import Typography from '../../components/Typography';
 
 const ShowAnimal = ({ route, navigation }) => {
   const { animal } = route.params;
+
+  console.log('>> animal');
+  console.log(animal);
+
+  console.log('>> animal[name]');
+  console.log(animal['name']);
+
+  console.log('>> animal.name');
+  console.log(animal.name);
 
   const [animalAddress, setAnimalAdress] = useState('');
   const [currentUser, setCurrentUser] = useState('');
 
   useEffect(() => {
-    setAnimalAdress(api.Users.getAdress(animal.owner));
+    setAnimalAdress(api.Users.getAdress(animal['owner_id']));
+
+    console.log('>> animal adress');
+    console.log(animalAddress);
   }, []);
 
   const handleAdoption = () => {
@@ -31,16 +44,16 @@ const ShowAnimal = ({ route, navigation }) => {
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
-      {/* <ActivityIndicator size="large" color={theme.colors.primary} />
-      <Text>{animal.name}</Text>
-      <Text>{animal.sex}</Text>
-      <Text>{animal.age}</Text>
-      <Text>{animalAddress}</Text>
-      <Text>{animal.health}</Text>
-      <Text>{animal.disease}</Text>
-      <Text>{animal.mood}</Text>
-      <Text>{animal.adoptionNeeds}</Text>
-      <Text>{animal.descriptrion}</Text> */}
+      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <Typography>{animal['name']}</Typography>
+      <Typography>{animal['sex']}</Typography>
+      <Typography>{animal['age']}</Typography>
+      {/* <Typography>{animalAddress}</Typography> */}
+      <Typography>{animal['health']}</Typography>
+      <Typography>{animal['disease']}</Typography>
+      <Typography>{animal['mood']}</Typography>
+      <Typography>{animal['adoptionNeeds']}</Typography>
+      <Typography>{animal['descriptrion']}</Typography>
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
