@@ -8,11 +8,10 @@ import { ButtonContainer } from './styles';
 import Typography from '../../components/Typography';
 import { dp } from '../../constants/Spacing';
 
-const ShowAnimal = ({ route, navigation }) => {
+const ShowAnimal = ({ route }) => {
   const { animal } = route.params;
 
   const [animalAddress, setAnimalAddress] = useState('');
-  const [currentUser, setCurrentUser] = useState('');
 
   const [imageUrl, setImageUrl] = useState('');
 
@@ -32,17 +31,14 @@ const ShowAnimal = ({ route, navigation }) => {
     );
   }, []);
 
-  const handleAdoption = () => {
-    setCurrentUser(firebase.auth().currentUser.uid);
-
-    if (!currentUser) {
-      return Alert.alert('Você precisa estar logado para adotar');
+  const adoptRequest = (animal) => {
+    let currentUserUID = firebase.auth().currentUser.uid;
+    if (!currentUserUID) {
+      return Alert.alert('Você precisa está logado para adotar');
     }
-
-    api.Animals.adopt(animal.id, currentUser)
-      .then(() => Alert.alert('Animal adotado com sucesso'))
-      .catch((e) => Alert.alert('Não foi possível adotar', e))
-      .finally(() => navigation.navigate('MyAnimals'));
+    api.AdoptionRequest.create(animal.id, animal.owner_id, currentUserUID)
+      .then(() => Alert.alert('Foi requisitado a adoção para o dono'))
+      .catch(() => Alert.alert('Não foi possível requisitar a adoção'));
   };
 
   return (
@@ -88,7 +84,7 @@ const ShowAnimal = ({ route, navigation }) => {
       <ButtonContainer>
         <Button
           color={theme.colors.secondary}
-          onPress={() => handleAdoption}
+          onPress={() => adoptRequest(animal)}
           styleTypho={{ color: '#434343' }}>
           PRETENDO ADOTAR
         </Button>
