@@ -52,9 +52,11 @@ export const show = async (id) => {
   });
 };
 
-export const getAdress = async (user_id) => {
+export const getAdress = async (id) => {
   const db = firebase.firestore();
-  const user = await db.collection('users').doc(user_id).get();
+  const user = await db.collection('users').doc(id).get();
+  console.log('>> user');
+  console.log(user);
   return user.address;
 };
 
