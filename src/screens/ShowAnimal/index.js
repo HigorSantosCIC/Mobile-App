@@ -51,37 +51,60 @@ const ShowAnimal = ({ route }) => {
         style={{ height: '25%', width: '100%' }}
       />
       <View style={{ padding: 20 }}>
-        <Text style={{ color: '#f7a800' }}>NOME</Text>
-        <Typography>{animal.name}</Typography>
-
-        <View style={{}}>
-          <Text style={{ color: '#f7a800' }}>SEXO</Text>
-          <Typography>{animal.sex}</Typography>
-
-          <Text style={{ color: '#f7a800' }}>PORTE</Text>
-          <Typography>{animal.size}</Typography>
-
-          <Text style={{ color: '#f7a800' }}>IDADE</Text>
-          <Typography>{animal.age}</Typography>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>NOME</Text>
+          <Typography>{animal.name}</Typography>
         </View>
 
-        <Text style={{ color: '#f7a800' }}>LOCALIZAÇÃO</Text>
-        <Typography>{animalAddress}</Typography>
+        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>SEXO</Text>
+            <Typography>{animal.sex}</Typography>
+          </View>
 
-        <Text style={{ color: '#f7a800' }}>SAÚDE</Text>
-        <Typography>{animal.health}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>PORTE</Text>
+            <Typography>{animal.size}</Typography>
+          </View>
 
-        <Text style={{ color: '#f7a800' }}>DOENÇAS</Text>
-        <Typography>{animal.disease}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>IDADE</Text>
+            <Typography>{animal.age}</Typography>
+          </View>
+        </View>
 
-        <Text style={{ color: '#f7a800' }}>TEMPERAMENTO</Text>
-        <Typography>{animal.mood}</Typography>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>LOCALIZAÇÃO</Text>
+          <Typography>{animalAddress}</Typography>
+        </View>
 
-        <Text style={{ color: '#f7a800' }}>NECESSIDADES DE ADOÇAO</Text>
-        <Typography>{animal.adoptionNeeds}</Typography>
+        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>SAÚDE</Text>
+            <Typography>{animal.health}</Typography>
+          </View>
 
-        <Text style={{ color: '#f7a800' }}>SOBRE</Text>
-        <Typography>{animal.descriptrion}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>DOENÇAS</Text>
+            <Typography>{animal.disease}</Typography>
+          </View>
+        </View>
+
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>TEMPERAMENTO</Text>
+          <Typography>{animal.mood}</Typography>
+        </View>
+
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>NECESSIDADES DE ADOÇAO</Text>
+          <Typography>{animal.adoptionNeeds}</Typography>
+        </View>
+
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>SOBRE</Text>
+          <Typography>{animal.descriptrion}</Typography>
+        </View>
+
         <ButtonContainer>
           <Button
             color={theme.colors.secondary}
