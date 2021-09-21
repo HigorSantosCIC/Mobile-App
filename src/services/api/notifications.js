@@ -19,6 +19,7 @@ export const create = async ({
       body,
       type,
       resourceId,
+      createdAt: Date.now(),
       readed: false,
     });
   } catch (err) {
