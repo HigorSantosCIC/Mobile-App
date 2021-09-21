@@ -6,7 +6,7 @@ export const create = async (animalId, ownerAnimalId, currentUserId) => {
   const db = firebase.firestore();
 
   try {
-    db.collection('adoptionRequest').add({
+    const adoptionRequest = await db.collection('adoptionRequest').add({
       animalId: animalId,
       requestUserId: currentUserId,
       accepted: false,
@@ -15,7 +15,8 @@ export const create = async (animalId, ownerAnimalId, currentUserId) => {
     Notifications.create({
       fromUserId: currentUserId,
       toUserId: ownerAnimalId,
-      title: 'Seu animal foi requsitado para adoção',
+      resourceId: adoptionRequest.id,
+      title: 'Seu animal foi requisitado para adoção',
       body: 'Clique para responder a solicitação',
       type: 'adoptionRequest',
     });
@@ -27,13 +28,13 @@ export const create = async (animalId, ownerAnimalId, currentUserId) => {
 
 export const accept = async (adoptionRequestId) => {
   const db = firebase.firestore();
-
+  console.log(adoptionRequestId);
   try {
     const adoptionRequestRef = db
       .collection('adoptionRequest')
       .doc(adoptionRequestId);
     // Update adoptionRequest
-    const adoptionRequest = await adoptionRequestRef.get();
+    const adoptionRequest = (await adoptionRequestRef.get()).data();
     adoptionRequestRef.update({
       accepted: true,
     });
@@ -43,7 +44,7 @@ export const accept = async (adoptionRequestId) => {
 
     // Notifications
     Notifications.create({
-      fromUserId: null,
+      fromUserId: adoptionRequest.requestUserId,
       toUserId: adoptionRequest.requestUserId,
       title: 'Parabéns!! Seu pedido de adoção foi aceito',
       body: 'Agora cuide muito bem do seu animal',
@@ -65,7 +66,7 @@ export const reject = async (adoptionRequestId) => {
       .get();
 
     Notifications.create({
-      fromUserId: null,
+      fromUserId: adoptionRequest.requestUserId,
       toUserId: adoptionRequest.requestUserId,
       title: 'Seu pedido de adoção não foi aceito',
       body: 'Procure outro animal que precisa de um dono',

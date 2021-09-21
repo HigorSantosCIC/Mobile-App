@@ -29,20 +29,6 @@ const AdoptScreen = () => {
       .finally(() => setLoading(false));
   };
 
-  const adoptRequest = (animal) => {
-    let currentUserUID = firebase.auth().currentUser.uid;
-    if (!currentUserUID) {
-      return Alert.alert('Você precisa está logado para adotar');
-    }
-    api.AdoptionRequest.create(
-      animal.item.id,
-      animal.item.owner_id,
-      currentUserUID,
-    )
-      .then(() => Alert.alert('Foi requisitado a adoção para o dono'))
-      .catch(() => Alert.alert('Não foi possível requisitar a adoção'));
-  };
-
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
@@ -52,7 +38,6 @@ const AdoptScreen = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                adoptRequest(animal);
                 navigation.navigate('ShowAnimal', { animal: animal.item });
               }}>
               <AnimalAdoption {...animal.item} key={animal.index} />
