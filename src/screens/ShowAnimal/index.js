@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, View, Text } from 'react-native';
+import { ActivityIndicator, Alert, Image, View, Text } from 'react-native';
 import firebase from 'firebase';
 import api from '../../services/api';
 import { theme } from '../../constants/Theme';
@@ -11,6 +11,18 @@ const ShowAnimal = ({ route }) => {
   const { animal } = route.params;
 
   const [animalAddress, setAnimalAddress] = useState('');
+
+  const [imageUrl, setImageUrl] = useState('');
+
+  const getImage = async () => {
+    const ref = firebase.storage().ref().child(`images/animals/${animal.name}`);
+    const remoteURL = await ref.getDownloadURL();
+    setImageUrl(remoteURL);
+  };
+
+  useEffect(() => {
+    getImage();
+  }, []);
 
   useEffect(() => {
     api.Users.getAddress(animal.owner_id).then((ownerAddress) =>
@@ -32,43 +44,76 @@ const ShowAnimal = ({ route }) => {
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       <ActivityIndicator size="large" color={theme.colors.primary} />
 
-      <Text style={{ color: '#f7a800' }}>NOME</Text>
-      <Typography>{animal.name}</Typography>
+      <Image
+        source={{
+          uri: imageUrl,
+        }}
+        style={{ height: '25%', width: '100%' }}
+      />
+      <View style={{ padding: 20 }}>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>NOME</Text>
+          <Typography>{animal.name}</Typography>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>SEXO</Text>
-      <Typography>{animal.sex}</Typography>
+        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>SEXO</Text>
+            <Typography>{animal.sex}</Typography>
+          </View>
 
-      <Text style={{ color: '#f7a800' }}>PORTE</Text>
-      <Typography>{animal.size}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>PORTE</Text>
+            <Typography>{animal.size}</Typography>
+          </View>
 
-      <Text style={{ color: '#f7a800' }}>IDADE</Text>
-      <Typography>{animal.age}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>IDADE</Text>
+            <Typography>{animal.age}</Typography>
+          </View>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>LOCALIZAÇÃO</Text>
-      <Typography>{animalAddress}</Typography>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>LOCALIZAÇÃO</Text>
+          <Typography>{animalAddress}</Typography>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>SAÚDE</Text>
-      <Typography>{animal.health}</Typography>
+        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>SAÚDE</Text>
+            <Typography>{animal.health}</Typography>
+          </View>
 
-      <Text style={{ color: '#f7a800' }}>DOENÇAS</Text>
-      <Typography>{animal.disease}</Typography>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#f7a800' }}>DOENÇAS</Text>
+            <Typography>{animal.disease}</Typography>
+          </View>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>TEMPERAMENTO</Text>
-      <Typography>{animal.mood}</Typography>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>TEMPERAMENTO</Text>
+          <Typography>{animal.mood}</Typography>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>NECESSIDADES DE ADOÇAO</Text>
-      <Typography>{animal.adoptionNeeds}</Typography>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>NECESSIDADES DE ADOÇAO</Text>
+          <Typography>{animal.adoptionNeeds}</Typography>
+        </View>
 
-      <Text style={{ color: '#f7a800' }}>SOBRE</Text>
-      <Typography>{animal.descriptrion}</Typography>
-      <ButtonContainer>
-        <Button
-          color={theme.colors.secondary}
-          onPress={() => adoptRequest(animal)}
-          styleTypho={{ color: '#434343' }}>
-          PRETENDO ADOTAR
-        </Button>
-      </ButtonContainer>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ color: '#f7a800' }}>SOBRE</Text>
+          <Typography>{animal.descriptrion}</Typography>
+        </View>
+
+        <ButtonContainer>
+          <Button
+            color={theme.colors.secondary}
+            onPress={() => adoptRequest(animal)}
+            styleTypho={{ color: '#434343' }}>
+            PRETENDO ADOTAR
+          </Button>
+        </ButtonContainer>
+      </View>
     </View>
   );
 };
