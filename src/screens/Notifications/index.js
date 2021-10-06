@@ -12,8 +12,11 @@ import { theme } from '../../constants/Theme';
 import Typography from '../../components/Typography';
 import { useFocusEffect } from '@react-navigation/native';
 
-const NotificationItem = (notification) => {
+const NotificationItem = (notification, refreshFunction) => {
   const handleOnPress = () => {
+    if (notification.readed) {
+      return;
+    }
     if (notification.type === 'adoptionRequest') {
       Alert.alert(
         'Você deseja adotar seu animal',
@@ -22,20 +25,28 @@ const NotificationItem = (notification) => {
           {
             text: 'Aceitar',
             onPress: () => {
+              api.Notifications.updateReaded(notification.id);
               api.AdoptionRequest.accept(notification.resourceId)
                 .then(() =>
                   Alert.alert('Parabéns seu animal foi adotado som sucesso'),
                 )
-                .catch(() => Alert.alert('Error ao aceitar solicitação'));
+                .catch(() => Alert.alert('Error ao aceitar solicitação'))
+                .finally(() => refreshFunction());
             },
           },
           {
             text: 'Rejeitar',
             onPress: () => {
+              api.Notifications.updateReaded(notification.id);
               api.AdoptionRequest.reject(notification.resourceId)
                 .then(() => Alert.alert('Pedido realizado com sucesso'))
-                .catch(() => Alert.alert('Error ao rejeitar solicitação'));
+                .catch(() => Alert.alert('Error ao rejeitar solicitação'))
+                .finally(() => refreshFunction());
             },
+          },
+          {
+            text: 'Sair',
+            onPress: () => {},
           },
         ],
       );
@@ -50,6 +61,7 @@ const NotificationItem = (notification) => {
           borderColor: 'gray',
           paddingHorizontal: 5,
           justifyContent: 'center',
+          backgroundColor: notification.readed ? '#ddd' : 'white',
         }}>
         <Typography style={{ fontSize: 16 }}>{notification.title}</Typography>
         <Typography style={{ fontSize: 12, paddingTop: 5, color: 'gray' }}>
@@ -87,7 +99,9 @@ const Notifications = () => {
       <FlatList
         style={{ flexGrow: 1 }}
         data={notifications}
-        renderItem={(notification) => NotificationItem(notification.item)}
+        renderItem={(notification) =>
+          NotificationItem(notification.item, fetchNotifications)
+        }
         ListEmptyComponent={() => (
           <Typography>Você não possui notificações</Typography>
         )}

@@ -42,8 +42,6 @@ const ShowAnimal = ({ route }) => {
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
-
       <Image
         source={{
           uri: imageUrl,
