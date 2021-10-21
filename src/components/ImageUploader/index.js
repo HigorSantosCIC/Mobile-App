@@ -13,6 +13,7 @@ const ImageUploader = ({ id, folder }) => {
 
     if (permissionResult.granted == false) {
       alert('Permissao para camera recusada.');
+      return;
     }
 
     const result = await ImagePicker.launchCameraAsync();
