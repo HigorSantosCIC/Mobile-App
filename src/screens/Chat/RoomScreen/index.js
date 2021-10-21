@@ -1,49 +1,45 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from 'firebase';
+import useAuth from '../../../hooks/useAuth';
 
-const RoomScreen = () => {
+const RoomScreen = ({ route }) => {
+  const db = firebase.firestore();
   const [messages, setMessages] = useState([]);
-  const [userImage, setUserImage] = useState(null);
-  const currentUser = firebase.auth().currentUser;
+  const { user } = useAuth();
 
-  // set user photo
-  useEffect(() => {
-    if (user) {
-      getImage();
-    }
-  }, [user]);
-
+  console.log(user);
   // Set messages
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
+    console.log(user);
+    const messagesListener = db
+      .collection('messages')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            _id: doc.data()._id,
+            createdAt: doc.data().createdAt.toDate(),
+            text: doc.data().text,
+            user: doc.data().name,
+          })),
+        ),
+      );
+
+    return () => messagesListener();
   }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages),
-    );
-  }, []);
+  const onSend = ([messages]) => {
+    db.collection('messages').add(messages);
+  };
 
   return (
     <GiftedChat
       messages={messages}
       onSend={(messages) => onSend(messages)}
       user={{
-        _id: 1,
-        name: currentUser.displayName,
-
+        _id: user.uid,
+        name: user.fullName
       }}
     />
   );

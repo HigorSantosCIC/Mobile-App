@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import api from '../services/api';
 
-const getUserImageUrl = async (userName = null) => {
+export const getUserImageUrl = async (userName = null) => {
   let imageName = '';
   if (!userName) {
     let currentUserUID = firebase.auth().currentUser;

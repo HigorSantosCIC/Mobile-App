@@ -18,7 +18,13 @@ const LoggedNavigator = () => {
       <Drawer.Screen name="MyAnimals" component={MyAnimals} />
       <Drawer.Screen name="Notifications" component={Notifications} />
       <Drawer.Screen name="Rooms" component={RoomsScreen} />
-      <Drawer.Screen name="Room" component={RoomScreen} />
+      <Drawer.Screen
+        name="Room"
+        component={RoomScreen}
+        // options={{
+        //   drawerItemStyle: { height: 0 },
+        // }}
+      />
     </Drawer.Navigator>
   );
 };
