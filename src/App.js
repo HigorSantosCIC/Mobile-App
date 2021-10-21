@@ -7,6 +7,7 @@ import { registerRootComponent } from 'expo';
 import { theme } from './constants/Theme';
 import { ThemeProvider } from 'styled-components/native';
 import useCachedResources from './hooks/useCachedResources';
+import { AuthProvider } from './contexts/auth';
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
@@ -21,7 +22,9 @@ const App = () => {
   } else {
     return (
       <ThemeProvider theme={theme}>
-        <Navigator />
+        <AuthProvider>
+          <Navigator />
+        </AuthProvider>
       </ThemeProvider>
     );
   }
