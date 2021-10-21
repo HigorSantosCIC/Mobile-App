@@ -47,7 +47,14 @@ export const myNotifications = async ({ currentUserId }) => {
   });
 };
 
+export const updateReaded = async (notificationId) => {
+  firebase.firestore().collection('notifications').doc(notificationId).update({
+    readed: true,
+  });
+};
+
 const Notifications = {
+  updateReaded,
   create,
   myNotifications,
 };

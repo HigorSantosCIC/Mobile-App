@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Image, View, Text } from 'react-native';
+import { Alert, Image, View, Text } from 'react-native';
 import firebase from 'firebase';
 import api from '../../services/api';
 import { theme } from '../../constants/Theme';
@@ -42,8 +42,6 @@ const ShowAnimal = ({ route }) => {
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
-
       <Image
         source={{
           uri: imageUrl,
