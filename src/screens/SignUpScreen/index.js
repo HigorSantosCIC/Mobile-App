@@ -137,16 +137,7 @@ const SignUpScreen = () => {
           <SignupFormTitle>
             <Text>FOTO DE PERFIL</Text>
           </SignupFormTitle>
-          <ImageUploader id={userName} folder="users" callBack={setImage} />
-          <Image
-            style={{
-              height: dp(180),
-              width: null,
-            }}
-            source={{
-              uri: image,
-            }}
-          />
+          <ImageUploader id={userName} folder="users" />
         </SignupFormContainer>
 
         <View
