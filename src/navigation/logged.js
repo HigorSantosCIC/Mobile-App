@@ -41,9 +41,9 @@ const LoggedNavigator = () => {
       <Drawer.Screen
         name="Room"
         component={RoomScreen}
-        // options={{
-        //   drawerItemStyle: { height: 0 },
-        // }}
+        options={{
+          drawerItemStyle: { height: 0 },
+        }}
       />
     </Drawer.Navigator>
   );
