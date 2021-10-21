@@ -1,13 +1,13 @@
-import { Text, View, ScrollView, Alert, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { dp } from '../../constants/Spacing';
-import { theme } from '../../constants/Theme';
-import { SignupFormContainer, SignupFormTitle, Input } from './styles';
-import Button from '../../components/Button';
-import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Alert, ScrollView, Text, View } from 'react-native';
+import Button from '../../components/Button';
 import ImageUploader from '../../components/ImageUploader';
 import Typography from '../../components/Typography';
+import { dp } from '../../constants/Spacing';
+import { theme } from '../../constants/Theme';
+import api from '../../services/api';
+import { Input, SignupFormContainer, SignupFormTitle } from './styles';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -21,7 +21,6 @@ const SignUpScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [image, setImage] = useState('');
 
   const handleSignup = () => {
     api.Users.create(
@@ -40,11 +39,6 @@ const SignUpScreen = () => {
         Alert.alert('Não foi possível realizar o cadastro', err.message),
       );
   };
-
-  useEffect(() => {
-    console.log('URL da image:', image);
-  }, [image]);
-
   return (
     <ScrollView>
       <View
@@ -137,16 +131,7 @@ const SignUpScreen = () => {
           <SignupFormTitle>
             <Text>FOTO DE PERFIL</Text>
           </SignupFormTitle>
-          <ImageUploader id={userName} folder="users" callBack={setImage} />
-          <Image
-            style={{
-              height: dp(180),
-              width: null,
-            }}
-            source={{
-              uri: image,
-            }}
-          />
+          <ImageUploader id={userName} folder="users" />
         </SignupFormContainer>
 
         <View

@@ -7,7 +7,6 @@ export const IconContainer = styled.View`
 `;
 
 export const ViewContainer = styled.View`
-  flex-direction: row;
+  display: flex;
   justify-content: center;
-  align-items: center;
 `;
