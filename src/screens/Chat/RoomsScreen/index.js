@@ -11,37 +11,41 @@ const RoomsScreen = ({ navigation }) => {
 
   useEffect(() => {
     // Get users rooms
-    let fetchRooms = [];
     db.collection('rooms')
       .where('user1', '==', user.uid)
       .get()
       .then((querySnapshot) => {
+        let fetchRooms = [];
         querySnapshot.forEach((doc) => {
-          fetchRooms.append(doc.data());
+          fetchRooms.append({ id: doc.id, ...doc.data() });
         });
+        setRooms(fetchRooms);
       });
     db.collection('rooms')
       .where('user2', '==', user.uid)
       .get()
       .then((querySnapshot) => {
+        let fetchRooms = [];
         querySnapshot.forEach((doc) => {
-          fetchRooms.append(doc.data());
+          fetchRooms.append({ id: doc.id, ...doc.data() });
         });
+        setRooms((prevState) => [...prevState, fetchRooms]);
       });
-    setRooms(fetchRooms);
-  });
+  }, []);
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
       <FlatList
         data={rooms}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate('Room', { room: item })}>
             <List.Item
-              title={item.name}
+              title={
+                item.user1Name === user.name ? item.user2Name : item.user1Name
+              }
               // description={item.latestMessage.text}
               titleNumberOfLines={1}
               titleStyle={styles.listTitle}
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listTitle: {
+    color: 'black',
     fontSize: 22,
   },
   listDescription: {
