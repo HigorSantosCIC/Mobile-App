@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableHighlight, Button, Image } from 'react-native';
-import { IconContainer, ViewContainer } from './styles';
-import firebase from 'firebase';
-import { dp } from '../../constants/Spacing';
-import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { camera } from 'expo-camera';
+import firebase from 'firebase';
+import React, { useState } from 'react';
+import { Button, Image, TouchableHighlight, View } from 'react-native';
+import { dp } from '../../constants/Spacing';
+import { ViewContainer } from './styles';
 
 const ImageUploader = ({ id, folder }) => {
   const [pickedImagePath, setPickedImagePath] = useState('');
