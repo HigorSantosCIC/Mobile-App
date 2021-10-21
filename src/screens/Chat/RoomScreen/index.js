@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from 'firebase';
 import useAuth from '../../../hooks/useAuth';
@@ -6,14 +6,14 @@ import useAuth from '../../../hooks/useAuth';
 const RoomScreen = ({ route }) => {
   const db = firebase.firestore();
   const [messages, setMessages] = useState([]);
+  const { room } = route.params;
   const { user } = useAuth();
 
-  console.log(user);
   // Set messages
   useEffect(() => {
-    console.log(user);
     const messagesListener = db
       .collection('messages')
+      .where('roomId', '==', room.id)
       .orderBy('createdAt', 'desc')
       .onSnapshot((snapshot) =>
         setMessages(
@@ -21,7 +21,7 @@ const RoomScreen = ({ route }) => {
             _id: doc.data()._id,
             createdAt: doc.data().createdAt.toDate(),
             text: doc.data().text,
-            user: doc.data().name,
+            user: doc.data().user,
           })),
         ),
       );
@@ -30,7 +30,7 @@ const RoomScreen = ({ route }) => {
   }, []);
 
   const onSend = ([messages]) => {
-    db.collection('messages').add(messages);
+    db.collection('messages').add({ roomId: room.id, ...messages });
   };
 
   return (
@@ -39,7 +39,7 @@ const RoomScreen = ({ route }) => {
       onSend={(messages) => onSend(messages)}
       user={{
         _id: user.uid,
-        name: user.fullName
+        name: user.fullName,
       }}
     />
   );

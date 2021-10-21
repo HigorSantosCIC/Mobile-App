@@ -1,37 +1,41 @@
 import { FlatList, View, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
 import useAuth from '../../../hooks/useAuth';
 import { Divider, List } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native';
 
 const RoomsScreen = ({ navigation }) => {
   const db = firebase.firestore();
   const { user } = useAuth();
   const [rooms, setRooms] = useState([]);
 
-  useEffect(() => {
-    // Get users rooms
-    db.collection('rooms')
-      .where('user1', '==', user.uid)
-      .get()
-      .then((querySnapshot) => {
-        let fetchRooms = [];
-        querySnapshot.forEach((doc) => {
-          fetchRooms.append({ id: doc.id, ...doc.data() });
+  useFocusEffect(
+    React.useCallback(() => {
+      db.collection('rooms')
+        .where('user1', '==', user.uid)
+        .get()
+        .then((querySnapshot) => {
+          let fetchRooms = [];
+          querySnapshot.forEach((doc) => {
+            fetchRooms.push({ id: doc.id, ...doc.data() });
+          });
+          setRooms((prevState) => [...prevState, ...fetchRooms]);
         });
-        setRooms(fetchRooms);
-      });
-    db.collection('rooms')
-      .where('user2', '==', user.uid)
-      .get()
-      .then((querySnapshot) => {
-        let fetchRooms = [];
-        querySnapshot.forEach((doc) => {
-          fetchRooms.append({ id: doc.id, ...doc.data() });
+
+      db.collection('rooms')
+        .where('user2', '==', user.uid)
+        .get()
+        .then((querySnapshot) => {
+          let fetchRooms = [];
+          querySnapshot.forEach((doc) => {
+            fetchRooms.push({ id: doc.id, ...doc.data() });
+          });
+          setRooms((prevState) => [...prevState, ...fetchRooms]);
         });
-        setRooms((prevState) => [...prevState, fetchRooms]);
-      });
-  }, []);
+      return () => setRooms([]);
+    }, []),
+  );
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: '#FAFAFA' }}>
@@ -44,7 +48,7 @@ const RoomsScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('Room', { room: item })}>
             <List.Item
               title={
-                item.user1Name === user.name ? item.user2Name : item.user1Name
+                item.user1Name === user.fullName ? item.user2Name : item.user1Name
               }
               // description={item.latestMessage.text}
               titleNumberOfLines={1}
