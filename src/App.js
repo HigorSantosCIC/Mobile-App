@@ -8,9 +8,12 @@ import { theme } from './constants/Theme';
 import { ThemeProvider } from 'styled-components/native';
 import useCachedResources from './hooks/useCachedResources';
 import { AuthProvider } from './contexts/auth';
+import { useIgnoreLogs } from './hooks/useIgnoreLogs';
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
+
+  useIgnoreLogs();
 
   if (!firebase.apps.length) {
     console.log('Connected with Firebase');
