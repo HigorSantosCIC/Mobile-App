@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 import Button from '../../components/Button';
 import ImageUploader from '../../components/ImageUploader';
@@ -21,7 +21,6 @@ const SignUpScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [image, setImage] = useState('');
 
   const handleSignup = () => {
     api.Users.create(
@@ -40,11 +39,6 @@ const SignUpScreen = () => {
         Alert.alert('Não foi possível realizar o cadastro', err.message),
       );
   };
-
-  useEffect(() => {
-    console.log('URL da image:', image);
-  }, [image]);
-
   return (
     <ScrollView>
       <View
