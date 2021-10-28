@@ -1,35 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Container } from './styles';
 import Typography from '../Typography';
 import { View, TouchableOpacity, Image } from 'react-native';
-import { getUserImageUrl } from '../../utils/images';
 import { theme } from '../../constants/Theme';
+import blankPicture from '../../../assets/blank-profile-picture.png';
 
 const ChatUserItem = ({ user, onPress }) => {
-  const [userImage, setUserImage] = useState(null);
-
-  useEffect(async () => {
-    console.log(await getUserImageUrl(userImage));
-    // getUserImageUrl(userImage).then((r) => setUserImage(r));
-  }, [user]);
-
+  const imageSource = () =>
+    user.avatarUrl ? { uri: user.avatarUrl } : blankPicture;
   return (
     <TouchableOpacity onPress={onPress}>
       <Container>
-        <View style={{ borderRadius: 48 }}>
-          {!!userImage && (
-            <Image
-              source={{
-                uri: userImage,
-              }}
-            />
-          )}
-        </View>
         <View>
-          <Typography style={{ color: theme.colors.primary, fontSize: 12 }}>
-            {user.fullName}
+          <Image
+            source={imageSource()}
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: 48 / 2,
+              overflow: 'hidden',
+            }}
+          />
+        </View>
+        <View style={{ paddingLeft: 16 }}>
+          <Typography style={{ color: theme.colors.primary, fontSize: 16 }}>
+            {user.fullName.toUpperCase()}
           </Typography>
-          <Typography>{user.city}</Typography>
+          <Typography style={{ color: '#bdbdbd', fontSize: 14, paddingTop: 2 }}>
+            {user.city}
+          </Typography>
         </View>
       </Container>
     </TouchableOpacity>
