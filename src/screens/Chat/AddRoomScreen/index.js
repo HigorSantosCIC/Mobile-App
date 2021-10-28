@@ -24,10 +24,10 @@ const AddRoomScreen = ({ navigation }) => {
 
   const createRoom = (otherUser) => {
     const roomParams = {
-      user1: user.uid,
-      user1Name: user.fullName,
-      user2: otherUser.id,
-      user2Name: otherUser.fullName,
+      user1Id: user.uid,
+      user2Id: otherUser.id,
+      user1: user,
+      user2: otherUser,
     };
     db.collection('rooms')
       .add(roomParams)
@@ -48,9 +48,7 @@ const AddRoomScreen = ({ navigation }) => {
         keyExtractor={(item) => item._id}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) => (
-          <ChatUserItem
-            user={item}
-            onPress={() => createRoom(item)}></ChatUserItem>
+          <ChatUserItem user={item} onPress={() => createRoom(item)} />
         )}
       />
     </View>

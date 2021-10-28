@@ -13,7 +13,9 @@ import useAuth from '../../hooks/useAuth';
 
 const DrawerContent = (props) => {
   const { user } = useAuth();
-  const [image, setImage] = useState(user.avatarUrl ? user.avatarUrl : null);
+  const [image, setImage] = useState(
+    user && user.avatarUrl ? user.avatarUrl : null,
+  );
 
   useEffect(() => {
     if (user && !image.avatarUrl) {

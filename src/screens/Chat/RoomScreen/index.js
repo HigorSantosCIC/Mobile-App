@@ -39,7 +39,8 @@ const RoomScreen = ({ route }) => {
       onSend={(messages) => onSend(messages)}
       user={{
         _id: user.uid,
-        name: user.fullName,
+        name: user?.fullName,
+        avatar: user?.avatarUrl,
       }}
     />
   );

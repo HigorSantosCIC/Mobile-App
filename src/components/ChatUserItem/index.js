@@ -8,6 +8,7 @@ import blankPicture from '../../../assets/blank-profile-picture.png';
 const ChatUserItem = ({ user, onPress }) => {
   const imageSource = () =>
     user.avatarUrl ? { uri: user.avatarUrl } : blankPicture;
+
   return (
     <TouchableOpacity onPress={onPress}>
       <Container>

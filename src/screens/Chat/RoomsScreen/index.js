@@ -1,9 +1,10 @@
-import { FlatList, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { FlatList, View } from 'react-native';
 import React, { useState } from 'react';
 import firebase from 'firebase';
 import useAuth from '../../../hooks/useAuth';
-import { Divider, List } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
+import ChatUserItem from '../../../components/ChatUserItem';
 
 const RoomsScreen = ({ navigation }) => {
   const db = firebase.firestore();
@@ -13,7 +14,7 @@ const RoomsScreen = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       db.collection('rooms')
-        .where('user1', '==', user.uid)
+        .where('user1Id', '==', user.uid)
         .get()
         .then((querySnapshot) => {
           let fetchRooms = [];
@@ -24,7 +25,7 @@ const RoomsScreen = ({ navigation }) => {
         });
 
       db.collection('rooms')
-        .where('user2', '==', user.uid)
+        .where('user2Id', '==', user.uid)
         .get()
         .then((querySnapshot) => {
           let fetchRooms = [];
@@ -44,19 +45,10 @@ const RoomsScreen = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Room', { room: item })}>
-            <List.Item
-              title={
-                item.user1Name === user.fullName ? item.user2Name : item.user1Name
-              }
-              // description={item.latestMessage.text}
-              titleNumberOfLines={1}
-              titleStyle={styles.listTitle}
-              descriptionStyle={styles.listDescription}
-              descriptionNumberOfLines={1}
-            />
-          </TouchableOpacity>
+          <ChatUserItem
+            user={item.user1.userName === user.userName ? item.user2 : item.user1}
+            onPress={() => navigation.navigate('Room', { room: item })}
+          />
         )}
       />
     </View>
@@ -64,17 +56,3 @@ const RoomsScreen = ({ navigation }) => {
 };
 
 export default RoomsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f5f5f5',
-    flex: 1,
-  },
-  listTitle: {
-    color: 'black',
-    fontSize: 22,
-  },
-  listDescription: {
-    fontSize: 16,
-  },
-});
