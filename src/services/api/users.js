@@ -12,6 +12,7 @@ export const create = async (
   phone,
   userName,
   password,
+  avatarUrl,
 ) => {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -27,6 +28,7 @@ export const create = async (
       address: address,
       phone: phone,
       userName: userName,
+      avatarUrl: avatarUrl,
     });
   } catch (err) {
     console.log(err);

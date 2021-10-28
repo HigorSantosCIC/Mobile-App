@@ -5,10 +5,10 @@ import { Button, Image, TouchableHighlight, View } from 'react-native';
 import { dp } from '../../constants/Spacing';
 import { ViewContainer } from './styles';
 
-const ImageUploader = ({ id, folder }) => {
+const ImageUploader = ({ id, folder, setImageUrl }) => {
   const [pickedImagePath, setPickedImagePath] = useState('');
 
-  async function openGaleria(id, folder) {
+  async function openGaleria() {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (permissionResult.granted == false) {
@@ -39,14 +39,11 @@ const ImageUploader = ({ id, folder }) => {
       xhr.open('GET', result.uri, true);
       xhr.send(null);
     });
-    const ref = firebase.storage().ref().child(`images/${folder}/${id}`);
 
-    const snapshot = await ref.put(blob, { contentType: 'image/png' });
-    const remoteURL = await snapshot.ref.getDownloadURL();
-    return remoteURL;
+    return await uploadImageFirebase(blob);
   }
 
-  async function openCamera(id, folder) {
+  async function openCamera() {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -77,28 +74,32 @@ const ImageUploader = ({ id, folder }) => {
       xhr.open('GET', result.uri, true);
       xhr.send(null);
     });
+
+    return await uploadImageFirebase(blob);
+  }
+
+  const uploadImageFirebase = async (blob) => {
     const ref = firebase.storage().ref().child(`images/${folder}/${id}`);
 
     const snapshot = await ref.put(blob, { contentType: 'image/png' });
     const remoteURL = await snapshot.ref.getDownloadURL();
+
+    if (setImageUrl) {
+      setImageUrl(remoteURL);
+    }
+
     return remoteURL;
-  }
+  };
 
   return (
     <View>
       <TouchableHighlight>
         <ViewContainer>
           <View style={{ padding: dp(10) }}>
-            <Button
-              onPress={() => openCamera(id, folder)}
-              title="Selecione uma imagem."
-            />
+            <Button onPress={() => openCamera()} title="Selecione uma imagem." />
           </View>
           <View style={{ padding: dp(10) }}>
-            <Button
-              onPress={() => openGaleria(id, folder)}
-              title="Abrir camera"
-            />
+            <Button onPress={() => openGaleria()} title="Abrir camera" />
           </View>
 
           <View style={{ padding: dp(30) }}>

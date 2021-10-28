@@ -9,18 +9,14 @@ import firebase from 'firebase';
 import { View, Image } from 'react-native';
 import Typography from '../Typography';
 import { dp } from '../../constants/Spacing';
+import useAuth from '../../hooks/useAuth';
 
 const DrawerContent = (props) => {
-  const [user, setUser] = useState(null);
-  const [image, setImage] = useState(null);
+  const { user } = useAuth();
+  const [image, setImage] = useState(user.avatarUrl ? user.avatarUrl : null);
 
   useEffect(() => {
-    let currentUserUID = firebase.auth().currentUser.uid;
-    api.Users.show(currentUserUID).then((user) => setUser(user));
-  }, []);
-
-  useEffect(() => {
-    if (user) {
+    if (user && !image.avatarUrl) {
       getImage();
     }
   }, [user]);
