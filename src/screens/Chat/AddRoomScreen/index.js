@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import useAuth from '../../../hooks/useAuth';
-import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
-import { Divider, List } from 'react-native-paper';
+import { Alert, FlatList, View } from 'react-native';
+import { Divider } from 'react-native-paper';
+import ChatUserItem from '../../../components/ChatUserItem';
 
 const AddRoomScreen = ({ navigation }) => {
   const db = firebase.firestore();
@@ -47,14 +48,9 @@ const AddRoomScreen = ({ navigation }) => {
         keyExtractor={(item) => item._id}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => createRoom(item)}>
-            <List.Item
-              title={item.fullName}
-              description={item.city}
-              titleNumberOfLines={1}
-              descriptionNumberOfLines={1}
-            />
-          </TouchableOpacity>
+          <ChatUserItem
+            user={item}
+            onPress={() => createRoom(item)}></ChatUserItem>
         )}
       />
     </View>
