@@ -13,12 +13,6 @@ export const AuthProvider = ({ children }) => {
         const uid = user.uid;
         api.Users.show(user.uid).then((user) => {
           setUser({ uid: uid, ...user });
-          // getUserImageUrl(user.username).then((imageUrl) =>
-          //   setUser((prevState) => ({
-          //     ...prevState,
-          //     avatarUrl: imageUrl,
-          //   })),
-          // );
         });
       }
     });
