@@ -18,7 +18,7 @@ const DrawerContent = (props) => {
   );
 
   useEffect(() => {
-    if (user && !image.avatarUrl) {
+    if (user && !user.avatarUrl) {
       getImage();
     }
   }, [user]);

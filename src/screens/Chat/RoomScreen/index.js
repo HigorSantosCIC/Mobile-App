@@ -40,7 +40,9 @@ const RoomScreen = ({ route }) => {
       user={{
         _id: user.uid,
         name: user?.fullName,
-        avatar: user?.avatarUrl,
+        avatar: user?.avatarUrl
+          ? user.avatarUrl
+          : 'https://woodfibreinsulation.co.uk/wp-content/uploads/2017/04/blank-profile-picture-973460-1-1.png',
       }}
     />
   );
