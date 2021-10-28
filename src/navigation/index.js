@@ -37,6 +37,7 @@ const Navigator = () => {
           component={AdoptScreen}
           options={{
             title: 'Adotar',
+            headerStyle: { backgroundColor: theme.colors.secondary },
           }}
         />
         <Stack.Screen
@@ -49,7 +50,14 @@ const Navigator = () => {
           component={ShowAnimal}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="MyAnimals" component={MyAnimals} />
+        <Stack.Screen
+          name="Meus Pets"
+          component={MyAnimals}
+          options={{
+            title: 'Meus Pets',
+            headerStyle: { backgroundColor: theme.colors.primary },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

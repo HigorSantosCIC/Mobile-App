@@ -11,6 +11,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import { dp } from '../../constants/Spacing';
 import firebase from 'firebase';
+import { theme } from '../../constants/Theme';
 
 const AnimalAdoption = ({ name, sex, age, size, place }) => {
   const [imageUrl, setImageUrl] = useState('');
@@ -27,7 +28,7 @@ const AnimalAdoption = ({ name, sex, age, size, place }) => {
 
   return (
     <Container>
-      <Header>
+      <Header style={{ backgroundColor: theme.colors.secondary }}>
         <Typography>{name}</Typography>
         <FontAwesome name="heart" size={24} color="#000000" />
       </Header>

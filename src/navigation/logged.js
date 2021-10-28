@@ -18,10 +18,10 @@ const LoggedNavigator = () => {
       initialRouteName="Dashboard"
       drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      <Drawer.Screen name="MyAnimals" component={MyAnimals} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen name="Meus Pets" component={MyAnimals} />
+      <Drawer.Screen name="Notificações" component={Notifications} />
       <Drawer.Screen
-        name="Rooms"
+        name="Chat"
         component={RoomsScreen}
         options={({ navigation }) => ({
           headerRight: () => (

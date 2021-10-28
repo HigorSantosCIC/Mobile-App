@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
           color: theme.colors.secondary,
           paddingTop: dp(56),
         }}>
-        Ola!
+        Olá!
       </Typography>
       <View style={{ paddingHorizontal: dp(48), paddingVertical: dp(52) }}>
         <Typography style={{ textAlign: 'center', fontSize: 16 }}>

@@ -9,9 +9,9 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  height: ${dp(25)}px;
-  padding-horizontal: 10px;
-  background-color: ${theme.colors.secondary};
+  height: ${dp(30)}px;
+  padding: 0 10px;
+  background-color: ${theme.colors.primary};
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
