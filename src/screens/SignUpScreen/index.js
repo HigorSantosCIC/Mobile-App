@@ -8,6 +8,7 @@ import { dp } from '../../constants/Spacing';
 import { theme } from '../../constants/Theme';
 import api from '../../services/api';
 import { Input, SignupFormContainer, SignupFormTitle } from './styles';
+import uuid from 'react-native-uuid';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -21,6 +22,7 @@ const SignUpScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const handleSignup = () => {
     api.Users.create(
@@ -33,6 +35,7 @@ const SignUpScreen = () => {
       phone,
       userName,
       password,
+      avatarUrl,
     )
       .then(() => navigation.push('Logged'))
       .catch((err) =>
@@ -131,7 +134,11 @@ const SignUpScreen = () => {
           <SignupFormTitle>
             <Text>FOTO DE PERFIL</Text>
           </SignupFormTitle>
-          <ImageUploader id={userName} folder="users" />
+          <ImageUploader
+            id={uuid.v1()}
+            folder="users"
+            setImageUrl={setAvatarUrl}
+          />
         </SignupFormContainer>
 
         <View

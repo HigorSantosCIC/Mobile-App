@@ -17,9 +17,21 @@ const LoggedNavigator = () => {
     <Drawer.Navigator
       initialRouteName="Dashboard"
       drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      <Drawer.Screen name="MyAnimals" component={MyAnimals} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{ title: 'Menu' }}
+      />
+      <Drawer.Screen
+        name="MyAnimals"
+        component={MyAnimals}
+        options={{ title: 'Meus animais' }}
+      />
+      <Drawer.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ title: 'Notificações' }}
+      />
       <Drawer.Screen
         name="Rooms"
         component={RoomsScreen}
@@ -31,18 +43,20 @@ const LoggedNavigator = () => {
               </TouchableOpacity>
             </View>
           ),
+          title: 'Chat',
         })}
       />
       <Drawer.Screen
         name="AddRoom"
         component={AddRoomScreen}
-        options={{ drawerItemStyle: { height: 0 } }}
+        options={{ drawerItemStyle: { height: 0 }, title: 'Adicionar chat' }}
       />
       <Drawer.Screen
         name="Room"
         component={RoomScreen}
         options={{
           drawerItemStyle: { height: 0 },
+          title: 'Conversa',
         }}
       />
     </Drawer.Navigator>
